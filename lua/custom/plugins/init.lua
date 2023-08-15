@@ -56,5 +56,37 @@ return {
 				on_attach = my_on_attach
 			})
 		end
-	}
+	},
+	{
+		-- For adding () around words
+		"kylechui/nvim-surround",
+		version = "*", -- Use for stability; omit to use `main` branch for the latest features
+		event = "VeryLazy",
+		config = function()
+			require("nvim-surround").setup({})
+		end
+	},
+	{
+		-- For auto indenting on creating a new tag
+		'windwp/nvim-autopairs',
+		event = "InsertEnter",
+		opts = {}
+	},
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {}
+	},
+	{
+		'romgrk/barbar.nvim',
+		dependencies = {
+			'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+			'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+		},
+		init = function() vim.g.barbar_auto_setup = false end,
+		opts = {
+			auto_hide = true
+		},
+		version = '^1.0.0', -- optional: only update when a new 1.x version is released
+	},
 }
