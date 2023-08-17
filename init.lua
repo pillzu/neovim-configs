@@ -478,13 +478,15 @@ end
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
 local servers = {
-  tsserver = {},
+  tsserver = {
+    filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+    -- cmd = { "typescript-language-server", "--stdio" }
+  },
   html = { filetypes = { 'html', 'twig', 'hbs' } },
 
   bufls = {},
   clangd = {},
   cssls = {},
-  denols = {},
   docker_compose_language_service = {},
   eslint = {},
   -- gofumpt = {},
@@ -492,6 +494,7 @@ local servers = {
   -- goimports_reviser = {},
   golangci_lint_ls = {},
   gopls = {},
+  prismals = {},
   -- htmlbeautifier = {},
   -- misspell = {},
   -- prettier = {},
