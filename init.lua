@@ -47,6 +47,16 @@ vim.g.maplocalleader = ' '
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+local opt = vim.opt
+-- indenting
+opt.expandtab = true
+opt.shiftwidth = 2
+opt.smartindent = true
+opt.tabstop = 2
+opt.softtabstop = 2
+
+-- disbale nvim information
+opt.shortmess:append "sI"
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -594,6 +604,12 @@ cmp.setup {
 }
 
 -- The line beneath this is called `modeline`. See `:help modeline`
+-- vim: ts=2 sts=2 sw=2 et
+-- vim: ts=2 sts=2 sw=2 et
+-- vim: ts=2 sts=2 sw=2 et
+-- vim: ts=2 sts=2 sw=2 et
+-- vim: ts=2 sts=2 sw=2 et
+-- vim: ts=2 sts=2 sw=2 et
 -- vim: ts=2 sts=2 sw=2 et
 -- vim: ts=2 sts=2 sw=2 et
 -- vim: ts=2 sts=2 sw=2 et
