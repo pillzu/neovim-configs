@@ -239,6 +239,7 @@ vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.wo.relativenumber = true
+vim.wo.number = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -514,6 +515,7 @@ local servers = {
   stylelint_lsp = {},
   svelte = {},
 
+
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -537,6 +539,20 @@ mason_lspconfig.setup {
 }
 
 mason_lspconfig.setup_handlers {
+  require('lspconfig')["metals"].setup {
+    capabilities = capabilities,
+    on_attach = function(client, bufnr)
+      require "lsp_signature".on_attach({
+        bind = true, -- This is mandatory, otherwise border config won't get registered.
+        handler_opts = {
+          border = "rounded"
+        }
+      }, bufnr)
+      on_attach(client, bufnr)
+    end,
+    settings = servers["metals"],
+    filetypes = (servers["metals"] or {}).filetypes,
+  },
   function(server_name)
     require('lspconfig')[server_name].setup {
       capabilities = capabilities,
