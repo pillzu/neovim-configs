@@ -7,6 +7,12 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
       {
+        -- telescope file browser
+        "nvim-telescope/telescope-file-browser.nvim",
+        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+        lazy = false,
+      },
+      {
         'nvim-telescope/telescope-fzf-native.nvim',
         -- make sure you have `make`
         build = 'make',
@@ -53,7 +59,7 @@ return {
 
       vim.api.nvim_set_keymap(
         "n",
-        "<space>fb",
+        "<leader>fb",
         ":Telescope file_browser<CR>",
         { noremap = true }
       )
@@ -70,7 +76,6 @@ return {
       vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<C-n>', ":NvimTreeToggle<CR>", { desc = "nvim-tree: Toggle" })
       vim.keymap.set('n', '<leader>l', ":NvimTreeFocus<CR>", { desc = "nvim-tree: Focus" })
-      print('keymaps set')
     end
   },
 }

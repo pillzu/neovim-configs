@@ -18,4 +18,5 @@ require('lazy').setup({
   require 'core.plugins.essentials',
   require 'core.plugins.themes',
   require 'core.plugins.telescope',
+  require 'core.plugins.mason',
 })
