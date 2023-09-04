@@ -13,10 +13,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  require 'core.plugins.autoformat',
-  require 'core.plugins.debug',
-  require 'core.plugins.essentials',
-  require 'core.plugins.themes',
-  require 'core.plugins.telescope',
-  require 'core.plugins.mason',
+  require 'plugins.autoformat',
+  require 'plugins.debug',
+  require 'plugins.essentials',
+  require 'plugins.themes',
+  require 'plugins.telescope',
+  require 'plugins.mason',
 })
