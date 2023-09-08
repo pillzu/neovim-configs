@@ -15,8 +15,13 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   require 'plugins.autoformat',
   require 'plugins.debug',
-  require 'plugins.essentials',
   require 'plugins.themes',
   require 'plugins.telescope',
   require 'plugins.mason',
+  require 'plugins.git',
+  require 'plugins.nvim-cmp',
+  require 'plugins.treesitter',
+  require 'plugins.lualine',
+  require 'plugins.comment',
+  require 'plugins.essentials',
 })
