@@ -18,20 +18,12 @@ return {
   },
 
   {
-    "ray-x/lsp_signature.nvim",
-    event = "VeryLazy",
-    opts = {},
-    config = function(_, opts) require 'lsp_signature'.setup(opts) end
-  },
-  {
     "https://github.com/windwp/nvim-ts-autotag",
-    config = function()
-      require 'nvim-treesitter.configs'.setup {
-        autotag = {
-          enable = true,
-        }
+    opts = {
+      autotag = {
+        enable = true,
       }
-    end
+    }
   },
   {
     "nvim-tree/nvim-tree.lua",

@@ -48,33 +48,47 @@ end
 
 -- servers installed by mason and mason lsp config
 M.servers = {
-  tsserver = {
-    filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+  tsserver                        = {
+    filetypes = { "typescript", "typescriptreact", "typescript.tsx", "svelte" },
   },
-  html = { filetypes = { 'html', 'twig', 'hbs' } },
 
-  bufls = {},
-  clangd = {},
-  cssls = {},
+  html                            = { filetypes = { 'html', 'twig', 'hbs' } },
+  clangd                          = {},
+
+  cssls                           = {},
+  stylelint_lsp                   = {},
+  css_lsp                         = {},
+
   docker_compose_language_service = {},
-  eslint = {},
-  golangci_lint_ls = {},
-  gopls = {},
-  prismals = {},
-  pyright = {},
-  pylsp = {},
-  rust_analyzer = {},
-  stylelint_lsp = {},
-  svelte = {},
+  dockerls                        = {},
 
+  eslint                          = {},
 
-  lua_ls = {
+  golangci_lint_ls                = {},
+  gopls                           = {},
+  goimports_reviser               = {},
+  golines                         = {},
+
+  prismals                        = {},
+
+  pyright                         = {},
+  pylsp                           = {},
+
+  bufls                           = {},
+
+  svelte                          = {},
+  prettier                        = {},
+  tailwindcss                     = {},
+  vtsls                           = {},
+  write_good                      = {},
+  lua_ls                          = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
     },
   },
 }
+
 
 -- Tree-sitter-ensure-installed configuration
 M.ts_ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' }
