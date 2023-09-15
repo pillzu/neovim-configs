@@ -10,7 +10,7 @@ local nmap = function(keys, func, desc)
     desc = 'LSP: ' .. desc
   end
 
-  vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+  vim.keymap.set('n', keys, func, { buffer = true, desc = desc })
 end
 
 --  This function gets run when an LSP connects to a particular buffer.
@@ -19,15 +19,16 @@ M.on_attach = function(_, bufnr)
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+  nmap('gs', vim.lsp.buf.signature_help, '[G]et [S]ignature help')
+  nmap('<leader>gD', vim.lsp.buf.declaration, '[G]oto Type [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-  nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
+
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -45,52 +46,4 @@ M.on_attach = function(_, bufnr)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
 end
-
--- servers installed by mason and mason lsp config
-M.servers = {
-  tsserver                        = {
-    filetypes = { "typescript", "typescriptreact", "typescript.tsx", "svelte" },
-  },
-
-  html                            = { filetypes = { 'html', 'twig', 'hbs' } },
-  clangd                          = {},
-
-  cssls                           = {},
-  stylelint_lsp                   = {},
-  css_lsp                         = {},
-
-  docker_compose_language_service = {},
-  dockerls                        = {},
-
-  eslint                          = {},
-
-  golangci_lint_ls                = {},
-  gopls                           = {},
-  goimports_reviser               = {},
-  golines                         = {},
-
-  prismals                        = {},
-
-  pyright                         = {},
-  pylsp                           = {},
-
-  bufls                           = {},
-
-  svelte                          = {},
-  prettier                        = {},
-  tailwindcss                     = {},
-  vtsls                           = {},
-  write_good                      = {},
-  lua_ls                          = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-    },
-  },
-}
-
-
--- Tree-sitter-ensure-installed configuration
-M.ts_ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' }
-
 return M

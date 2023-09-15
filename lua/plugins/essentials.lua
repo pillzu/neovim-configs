@@ -1,12 +1,9 @@
-local utils = require('utils')
-
 return {
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
-
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',  opts = {} },
+  { 'folke/which-key.nvim', opts = {} },
 
   {
     -- Add indentation guides even on blank lines
@@ -17,39 +14,39 @@ return {
     },
   },
 
+  -- {
+  --   "https://github.com/windwp/nvim-ts-autotag",
+  --   opts = {
+  --     autotag = {
+  --       enable = true,
+  --     }
+  --   }
+  -- },
   {
-    "https://github.com/windwp/nvim-ts-autotag",
-    opts = {
-      autotag = {
-        enable = true,
-      }
-    }
-  },
-  {
-    "nvim-tree/nvim-tree.lua",
+    'nvim-tree/nvim-tree.lua',
     dependencies = {
       'nvim-tree/nvim-web-devicons',
     },
 
     config = function()
       local function my_on_attach(bufnr)
-        local api = require "nvim-tree.api"
+        local api = require 'nvim-tree.api'
         local function opts(desc)
           return {
-            desc = "nvim-tree: " .. desc,
+            desc = 'nvim-tree: ' .. desc,
             buffer = bufnr,
             noremap = true,
             silent = true,
-            nowait = true
+            nowait = true,
           }
         end
         api.config.mappings.default_on_attach(bufnr)
       end
 
-      require("nvim-tree").setup({
+      require('nvim-tree').setup {
         filters = {
           dotfiles = false,
-          exclude = { vim.fn.stdpath "config" .. "/lua/custom" },
+          exclude = { vim.fn.stdpath 'config' .. '/lua/custom' },
         },
         disable_netrw = true,
         hijack_netrw = true,
@@ -62,7 +59,7 @@ return {
         },
         view = {
           adaptive_size = false,
-          side = "left",
+          side = 'left',
           width = 30,
           preserve_window_proportions = true,
         },
@@ -81,7 +78,7 @@ return {
         renderer = {
           root_folder_label = false,
           highlight_git = false,
-          highlight_opened_files = "none",
+          highlight_opened_files = 'none',
 
           indent_markers = {
             enable = false,
@@ -96,76 +93,65 @@ return {
             },
 
             glyphs = {
-              default = "󰈚",
-              symlink = "",
+              default = '󰈚',
+              symlink = '',
               folder = {
-                default = "",
-                empty = "",
-                empty_open = "",
-                open = "",
-                symlink = "",
-                symlink_open = "",
-                arrow_open = "",
-                arrow_closed = "",
+                default = '',
+                empty = '',
+                empty_open = '',
+                open = '',
+                symlink = '',
+                symlink_open = '',
+                arrow_open = '',
+                arrow_closed = '',
               },
               git = {
-                unstaged = "✗",
-                staged = "✓",
-                unmerged = "",
-                renamed = "➜",
-                untracked = "★",
-                deleted = "",
-                ignored = "◌",
+                unstaged = '✗',
+                staged = '✓',
+                unmerged = '',
+                renamed = '➜',
+                untracked = '★',
+                deleted = '',
+                ignored = '◌',
               },
             },
           },
         },
-        sort_by = "case_sensitive",
-        -- view = {
-        --
-        --   width = 30,
-        -- },
-        -- renderer = {
-        --   group_empty = true,
-        -- },
-        -- filters = {
-        --   dotfiles = true,
-        -- },
-        on_attach = my_on_attach
-      })
-    end
+        sort_by = 'case_sensitive',
+        on_attach = my_on_attach,
+      }
+    end,
   },
   {
     -- For adding () around words
-    "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
+    'kylechui/nvim-surround',
+    version = '*', -- Use for stability; omit to use `main` branch for the latest features
+    event = 'VeryLazy',
     config = function()
-      require("nvim-surround").setup({})
-    end
+      require('nvim-surround').setup {}
+    end,
   },
   {
     -- For auto indenting on creating a new tag
     'windwp/nvim-autopairs',
-    event = "InsertEnter",
-    opts = {}
+    event = 'InsertEnter',
+    opts = {},
   },
   {
-    "folke/todo-comments.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    opts = {}
+    'folke/todo-comments.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    opts = {},
   },
   {
     'akinsho/bufferline.nvim',
-    version = "*",
+    version = '*',
     dependencies = 'nvim-tree/nvim-web-devicons',
     config = function()
-      local bufferline = require('bufferline')
+      local bufferline = require 'bufferline'
       bufferline.setup {
         style_preset = bufferline.style_preset.padded_slant, -- or bufferline.style_preset.minimal,
-
       }
-    end
+    end,
   },
-  { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
+  { 'ellisonleao/glow.nvim', config = true, cmd = 'Glow' },
 }

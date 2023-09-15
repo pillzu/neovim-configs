@@ -7,9 +7,9 @@ return {
     },
     build = ':TSUpdate',
     config = function()
-      local utils = require('utils')
+      local config = require 'config'
       require('nvim-treesitter.configs').setup {
-        ensure_installed = utils.ts_ensure_installed,
+        ensure_installed = config.ts_ensure_installed,
 
         auto_install = true,
 
@@ -69,22 +69,16 @@ return {
           },
         },
       }
-    end
+    end,
   },
-  {
-    "ray-x/lsp_signature.nvim",
-    event = "VeryLazy",
-    opts = {},
-    config = function(_, opts) require 'lsp_signature'.setup(opts) end
-  },
-  {
-    "https://github.com/windwp/nvim-ts-autotag",
-    config = function()
-      require 'nvim-treesitter.configs'.setup {
-        autotag = {
-          enable = true,
-        }
-      }
-    end
-  }
+  -- {
+  --   "https://github.com/windwp/nvim-ts-autotag",
+  --   config = function()
+  --     require 'nvim-treesitter.configs'.setup {
+  --       autotag = {
+  --         enable = true,
+  --       }
+  --     }
+  --   end
+  -- }
 }
