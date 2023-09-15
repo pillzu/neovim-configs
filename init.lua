@@ -20,10 +20,29 @@ require('lazy').setup({
   {
     "EdenEast/nightfox.nvim",
     priority = 1000,
+    lazy = false,
     config = function()
       vim.cmd.colorscheme 'carbonfox'
     end,
   },
+  -- -- dashboard
+  -- {
+  --   'glepnir/dashboard-nvim',
+  --   event = 'VimEnter',
+  --   config = function()
+  --     local db = require('config').dashboard
+  --     require('dashboard').setup({})
+  --   end,
+  --   dependencies = { { 'nvim-tree/nvim-web-devicons' } }
+  -- },
+
+  {
+    'goolord/alpha-nvim',
+    config = function()
+      require 'alpha'.setup(require 'alpha.themes.dashboard'.config)
+    end
+  },
+
   -- Additional lua configuration, makes nvim stuff amazing!
   { 'folke/neodev.nvim', opts = {} },
 

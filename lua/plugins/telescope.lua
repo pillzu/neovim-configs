@@ -23,6 +23,7 @@ return {
     },
 
     config = function()
+      ---@diagnostic disable-next-line: deprecated
       local vimgrep_arguments = { unpack(require("telescope.config").values.vimgrep_arguments) }
       -- I want to search in hidden/dot files.
       table.insert(vimgrep_arguments, "--hidden")
