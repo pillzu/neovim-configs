@@ -10,7 +10,6 @@ return {
           builtins.diagnostics.codespell,
           builtins.diagnostics.eslint_d,
           builtins.formatting.rustywind,
-          builtins.diagnostics.misspell
         }
       }
     end,

@@ -2,6 +2,9 @@ return {
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
+  -- tmux <-> vim navigation
+  'christoomey/vim-tmux-navigator',
+
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim',  opts = {} },
 
@@ -14,14 +17,6 @@ return {
     },
   },
 
-  -- {
-  --   "https://github.com/windwp/nvim-ts-autotag",
-  --   opts = {
-  --     autotag = {
-  --       enable = true,
-  --     }
-  --   }
-  -- },
   {
     'nvim-tree/nvim-tree.lua',
     dependencies = {

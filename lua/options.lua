@@ -15,7 +15,11 @@ opt.smartindent = true
 opt.tabstop = 2
 opt.softtabstop = 2
 
--- disbale nvim information
+opt.cursorline = true
+
+opt.background = "dark"
+
+-- disable nvim information
 opt.shortmess:append "sI"
 
 -- Set highlight on search
@@ -50,6 +54,10 @@ vim.o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
+
+-- split
+opt.splitright = true
+opt.splitbelow = true
 
 -- NOTE: Careful! Terminal must support this
 vim.o.termguicolors = true
