@@ -5,6 +5,9 @@ return {
   -- tmux <-> vim navigation
   'christoomey/vim-tmux-navigator',
 
+  -- maximize and restore current window
+  'szw/vim-maximizer',
+
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim',  opts = {} },
 

@@ -16,16 +16,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  -- theme
-  -- {
-  --   "EdenEast/nightfox.nvim",
-  --   priority = 1000,
-  --   lazy = false,
-  --   config = function()
-  --     vim.cmd.colorscheme 'carbonfox'
-  --   end,
-  -- },
-
   {
     "catppuccin/nvim",
     name = "catppuccin",

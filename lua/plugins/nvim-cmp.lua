@@ -6,15 +6,40 @@ return {
       'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer',
       'rafamadriz/friendly-snippets',
     },
     config = function()
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       require('luasnip.loaders.from_vscode').lazy_load()
-      luasnip.config.setup {}
+
+      local function border(hl_name)
+        return {
+          { "╭", hl_name },
+          { "─", hl_name },
+          { "╮", hl_name },
+          { "│", hl_name },
+          { "╯", hl_name },
+          { "─", hl_name },
+          { "╰", hl_name },
+          { "│", hl_name },
+        }
+      end
+
 
       cmp.setup {
+        window = {
+          completion = {
+            side_padding = 1,
+            scrollbar = false,
+            border = border "CmpPMenu",
+          },
+          documentation = {
+            border = border "CmpDoc",
+            winhighlight = "Normal:CmpDoc",
+          },
+        },
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -52,6 +77,8 @@ return {
         sources = {
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
+          { name = 'buffer' },
+          { name = 'path' },
         },
       }
     end

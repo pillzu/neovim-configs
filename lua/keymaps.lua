@@ -12,6 +12,7 @@ vim.keymap.set('n', '<leader>sv', '<C-w>v', { desc = "[S]plit [V]ertically", sil
 vim.keymap.set('n', '<leader>sh', '<C-w>s', { desc = "[S]plit [H]orizontally", silent = true })
 vim.keymap.set('n', '<leader>se', '<C-w>=', { desc = "[S]plit [E]qually", silent = true })
 vim.keymap.set('n', '<leader>sx', ':close<CR>', { desc = "[S]plit [C]lose", silent = true })
+vim.keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>", { desc = "[S]plit [M]aximize", silent = true })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
