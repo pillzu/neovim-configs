@@ -3,7 +3,7 @@ return {
   'tpope/vim-sleuth',
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
 
   {
     -- Add indentation guides even on blank lines
@@ -149,7 +149,8 @@ return {
     config = function()
       local bufferline = require 'bufferline'
       bufferline.setup {
-        style_preset = bufferline.style_preset.padded_slant, -- or bufferline.style_preset.minimal,
+        -- style_preset = bufferline.style_preset.padded_slant, -- or bufferline.style_preset.minimal,
+        highlights = require("catppuccin.groups.integrations.bufferline").get()
       }
     end,
   },

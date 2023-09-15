@@ -17,29 +17,27 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
   -- theme
-  {
-    "EdenEast/nightfox.nvim",
-    priority = 1000,
-    lazy = false,
-    config = function()
-      vim.cmd.colorscheme 'carbonfox'
-    end,
-  },
-  -- -- dashboard
   -- {
-  --   'glepnir/dashboard-nvim',
-  --   event = 'VimEnter',
+  --   "EdenEast/nightfox.nvim",
+  --   priority = 1000,
+  --   lazy = false,
   --   config = function()
-  --     local db = require('config').dashboard
-  --     require('dashboard').setup({})
+  --     vim.cmd.colorscheme 'carbonfox'
   --   end,
-  --   dependencies = { { 'nvim-tree/nvim-web-devicons' } }
   -- },
 
   {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    init = function()
+      vim.cmd.colorscheme 'catppuccin-mocha'
+    end
+  },
+  {
     'goolord/alpha-nvim',
     config = function()
-      require 'alpha'.setup(require 'alpha.themes.dashboard'.config)
+      require('config').dashboard()
     end
   },
 
