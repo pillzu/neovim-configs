@@ -2,10 +2,10 @@ local M = {}
 -- servers installed by mason and mason lsp config
 M.mason_servers = {
   tsserver = {
-    filetypes = { 'typescript', 'typescriptreact', 'typescript.tsx', 'svelte' },
+    filetypes = { 'typescript', 'typescriptreact', 'typescript.tsx' },
   },
   svelte = {},
-  html = { filetypes = { 'html', 'twig', 'hbs' } },
+  -- html = { filetypes = { 'html', 'twig', 'hbs' } },
   cssls = {},
   stylelint_lsp = {},
   eslint = {},
