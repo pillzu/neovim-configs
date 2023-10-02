@@ -7,10 +7,7 @@ M.mason_servers = {
   svelte = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs' } },
   cssls = {},
-  stylelint_lsp = {},
-  eslint = {},
   tailwindcss = {},
-  vtsls = {},
 
   docker_compose_language_service = {},
   dockerls = {},

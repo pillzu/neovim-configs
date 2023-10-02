@@ -70,7 +70,13 @@ return {
       vim.keymap.set('n', '<leader><leader>', require('telescope.builtin').buffers,
         { desc = '[ ] Find existing buffers' })
       vim.keymap.set('n', '<leader>gs', require('telescope.builtin').git_status, { desc = 'View [G]it [S]tatus' })
-      vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
+      vim.keymap.set('n', '<leader>gf', function()
+        if require("obsidian").util.cursor_on_markdown_link() then
+          return "<cmd>ObsidianFollowLink<CR>"
+        else
+          require('telescope.builtin').git_files()
+        end
+      end, { desc = 'Search [G]it [F]iles' })
       vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [F]iles' })
       vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = '[F]ind [H]elp' })
       vim.keymap.set('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = '[F]ind current [W]ord' })
