@@ -1,11 +1,16 @@
 return {
   {
     "folke/trouble.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+      {
+        'folke/todo-comments.nvim',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+        opts = {},
+      },
     },
     config = function()
-      require("trouble").setup({})
+      require("trouble").setup()
       vim.keymap.set("n", "<leader>tt", function() require("trouble").open() end, { desc = "Trouble: Toggle" })
       vim.keymap.set("n", "<leader>tw", function() require("trouble").open("workspace_diagnostics") end,
         { desc = "Trouble: Workspace Diagnostics" })

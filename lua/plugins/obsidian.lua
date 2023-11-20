@@ -15,7 +15,7 @@ return {
   },
   opts = {
     dir = "/mnt/a/Second_Brain/second-brain",
-    notes_subdir = "coding",
+    notes_subdir = "Coding",
 
     completion = {
       nvim_cmp = true,
