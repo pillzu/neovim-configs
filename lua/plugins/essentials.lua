@@ -2,7 +2,7 @@ return {
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
-  'dstein64/vim-startuptime', -- NOTE: Only when testing
+  -- 'dstein64/vim-startuptime', -- NOTE: Only when testing
 
   -- tmux <-> vim navigation
   'christoomey/vim-tmux-navigator',
@@ -70,7 +70,7 @@ return {
           }
         },
         git = {
-          enable = false,
+          enable = true,
           ignore = true,
         },
         filesystem_watchers = {
@@ -155,5 +155,7 @@ return {
       }
     end,
   },
+
+  -- preview markdown files
   { 'ellisonleao/glow.nvim', config = true, cmd = 'Glow' },
 }
