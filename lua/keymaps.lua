@@ -19,7 +19,21 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- next,previous and close buffer
-vim.api.nvim_set_keymap('n', '<leader>x', ':bd<CR>', { noremap = true, silent = true })
+function ForceQuit()
+  if vim.bo.modified then
+    if vim.b.unsaved then
+      vim.cmd('bd!')
+      vim.b.unsaved = nil
+    else
+      vim.b.unsaved = true
+      print("Buffer is modified, press <leader> x again to discard changes and quit")
+    end
+  else
+    vim.cmd('bd!')
+  end
+end
+
+vim.api.nvim_set_keymap('n', '<leader>x', ':lua ForceQuit()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Tab>', ':bn<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<S-Tab>', ':bp<CR>', { noremap = true, silent = true })
 

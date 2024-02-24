@@ -2,6 +2,8 @@ return {
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
+  'dstein64/vim-startuptime', -- NOTE: Only when testing
+
   -- tmux <-> vim navigation
   'christoomey/vim-tmux-navigator',
 
@@ -9,15 +11,18 @@ return {
   'szw/vim-maximizer',
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',  opts = {} },
+  { 'folke/which-key.nvim', opts = {} },
+
+  -- Additional lua configuration, makes nvim stuff amazing!
+  { 'folke/neodev.nvim',    opts = {} },
 
   {
-    -- Add indentation guides even on blank lines
-    'lukas-reineke/indent-blankline.nvim',
-    opts = {
-      char = '┊',
-      show_trailing_blankline_indent = true,
-    },
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    config = function(_, opts)
+      require("ibl").setup {
+      }
+    end
   },
 
   {
@@ -29,17 +34,13 @@ return {
     config = function()
       local function my_on_attach(bufnr)
         local api = require 'nvim-tree.api'
-        local function opts(desc)
-          return {
-            desc = 'nvim-tree: ' .. desc,
-            buffer = bufnr,
-            noremap = true,
-            silent = true,
-            nowait = true,
-          }
-        end
         api.config.mappings.default_on_attach(bufnr)
       end
+
+      local gwidth = vim.api.nvim_list_uis()[1].width
+      local gheight = vim.api.nvim_list_uis()[1].height
+      local height = 30
+      local width = 80
 
       require('nvim-tree').setup {
         filters = {
@@ -56,10 +57,17 @@ return {
           update_root = false,
         },
         view = {
-          adaptive_size = false,
-          side = 'left',
-          width = 30,
-          preserve_window_proportions = true,
+          float = {
+            enable = true,
+            open_win_config = {
+              relative = "editor",
+              border = "rounded",
+              width = width,
+              height = height,
+              row = (gheight - height) * 0.4,
+              col = (gwidth - width) * 0.5,
+            }
+          }
         },
         git = {
           enable = false,
@@ -75,7 +83,7 @@ return {
         },
         renderer = {
           root_folder_label = false,
-          highlight_git = false,
+          highlight_git = true,
           highlight_opened_files = 'none',
 
           indent_markers = {
@@ -87,7 +95,7 @@ return {
               file = true,
               folder = true,
               folder_arrow = true,
-              git = false,
+              git = true,
             },
 
             glyphs = {
@@ -142,7 +150,7 @@ return {
     config = function()
       local bufferline = require 'bufferline'
       bufferline.setup {
-        -- style_preset = bufferline.style_preset.padded_slant, -- or bufferline.style_preset.minimal,
+        style_preset = bufferline.style_preset.padded_slant, -- or bufferline.style_preset.minimal,
         highlights = require("catppuccin.groups.integrations.bufferline").get()
       }
     end,

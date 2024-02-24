@@ -16,12 +16,11 @@ return {
   opts = {
     dir = "/mnt/a/Second_Brain/second-brain",
     notes_subdir = "Coding",
+    new_notes_location = "current_dir",
 
     completion = {
       nvim_cmp = true,
       min_chars = 2,
-      new_notes_location = "current_dir",
-      prepend_note_id = true
     },
 
     disable_frontmatter = true,
@@ -42,14 +41,6 @@ return {
       end
       return suffix
     end,
-
-    -- Optional, customize the backlinks interface.
-    backlinks = {
-      -- The default height of the backlinks pane.
-      height = 10,
-      -- Whether or not to wrap lines.
-      wrap = true,
-    },
   },
 
   config = function(_, opts)

@@ -41,7 +41,6 @@ M.mason_servers = {
         library = {
           [vim.fn.expand '$VIMRUNTIME/lua'] = true,
           [vim.fn.expand '$VIMRUNTIME/lua/vim/lsp'] = true,
-          [vim.fn.stdpath 'data' .. '/lazy/ui/nvchad_types'] = true,
           [vim.fn.stdpath 'data' .. '/lazy/lazy.nvim/lua/lazy'] = true,
         },
         maxPreload = 100000,
@@ -93,7 +92,7 @@ M.dashboard = function()
     dashboard.button("q", "❌  Quit Neovim", ":qa<CR>"),
   }
 
-  dashboard.section.footer.val = require('alpha.fortune')
+  dashboard.section.footer.val = "Never think you ain't gonna do it :)"
 
   dashboard.section.footer.opts.hl = "Type"
   dashboard.section.header.opts.hl = "Include"

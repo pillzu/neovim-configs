@@ -1,5 +1,4 @@
 return {
-
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
@@ -23,7 +22,7 @@ return {
     },
 
     config = function()
-      ---@diagnostic disable-next-line: deprecated
+      -- -@diagnostic disable-next-line: deprecated
       local vimgrep_arguments = { unpack(require("telescope.config").values.vimgrep_arguments) }
       -- I want to search in hidden/dot files.
       table.insert(vimgrep_arguments, "--hidden")
@@ -56,7 +55,7 @@ return {
 
       -- Enable telescope fzf native, if installed
       pcall(require('telescope').load_extension, 'fzf')
-      pcall(require("telescope").load_extension "file_browser")
+      -- pcall(require("telescope").load_extension "file_browser")
 
       vim.api.nvim_set_keymap(
         "n",
@@ -79,11 +78,9 @@ return {
       end, { desc = 'Search [G]it [F]iles' })
       vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [F]iles' })
       vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = '[F]ind [H]elp' })
-      vim.keymap.set('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = '[F]ind current [W]ord' })
       vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = '[F]ind by [G]rep' })
       vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[F]ind [D]iagnostics' })
       vim.keymap.set('n', '<C-n>', ":NvimTreeToggle<CR>", { desc = "nvim-tree: Toggle" })
-      vim.keymap.set('n', '<leader>l', ":NvimTreeFocus<CR>", { desc = "nvim-tree: Focus" })
     end
   },
 }

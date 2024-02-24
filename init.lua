@@ -1,5 +1,6 @@
-require 'options'
-require 'keymaps'
+-- map space as leader (needed for lazy)
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 -- install Lazy
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -16,23 +17,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000,
-    init = function()
-      vim.cmd.colorscheme 'catppuccin-mocha'
-    end
-  },
-  {
-    'goolord/alpha-nvim',
-    config = function()
-      require('config').dashboard()
-    end
-  },
-
-  -- Additional lua configuration, makes nvim stuff amazing!
-  { 'folke/neodev.nvim', opts = {} },
-
   { import = 'plugins' }
 })
+
+require 'options'
+require 'keymaps'
