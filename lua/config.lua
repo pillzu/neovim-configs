@@ -1,16 +1,11 @@
 local M = {}
 -- servers installed by mason and mason lsp config
 M.mason_servers = {
-  -- HTML/CSS
-  tailwindcss = {},
-  svelte = {},
-
-  -- docker
   docker_compose_language_service = {},
   dockerls = {},
 
-  -- go
-  gopls = {},
+  pyright = {},
+  pylsp = {},
 
   bashls = {},
 
