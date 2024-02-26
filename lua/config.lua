@@ -1,32 +1,12 @@
 local M = {}
 -- servers installed by mason and mason lsp config
 M.mason_servers = {
-  tsserver = {
-    filetypes = { 'typescript', 'typescriptreact', 'typescript.tsx', 'javascript', 'javascriptreact', 'javascript.jsx' },
-  },
-  svelte = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs' } },
-  cssls = {},
-  tailwindcss = {
-    filetypes = { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge",
-      "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "gohtmltmpl", "haml", "handlebars", "hbs", "html",
-      "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor",
-      "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact",
-      "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte" }
-  },
-
   docker_compose_language_service = {},
   dockerls = {},
-
-  prismals = {},
-
-  golangci_lint_ls = {},
-  gopls = {},
 
   pyright = {},
   pylsp = {},
 
-  bufls = {},
   bashls = {},
 
   clangd = {},

@@ -41,7 +41,7 @@ return {
     },
     config = function()
       --  Use :Afmt to toggle autoformatting on or off
-      local format_is_enabled = true
+      local format_is_enabled = false
       vim.api.nvim_create_user_command('Afmt', function()
         format_is_enabled = not format_is_enabled
         print('Setting autoformatting to: ' .. tostring(format_is_enabled))
