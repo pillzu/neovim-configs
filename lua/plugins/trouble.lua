@@ -21,6 +21,8 @@ return {
       vim.keymap.set("n", "<leader>tl", function() require("trouble").open("loclist") end, { desc = "Trouble: Loc list" })
       vim.keymap.set("n", "gR", function() require("trouble").open("lsp_references") end,
         { desc = "Trouble: Lsp References" })
+      vim.keymap.set("n", "<leader>tx", function() require("trouble").open("todo") end,
+        { desc = "Trouble: Todo", silent = true })
     end
   }
 }
