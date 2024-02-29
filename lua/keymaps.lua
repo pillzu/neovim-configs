@@ -53,9 +53,3 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous dia
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
-
--- Essential movement keys
-vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
