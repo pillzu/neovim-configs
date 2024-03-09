@@ -29,18 +29,6 @@ vim.wo.number = true
 vim.o.mouse = 'a'
 
 -- Combine OS and neovim clipboard
-vim.g.clipboard = {
-  name = "xsel",
-  copy = {
-    ["+"] = "xsel --nodetach -i -b",
-    ["*"] = "xsel --nodetach -i -p",
-  },
-  paste = {
-    ["+"] = "xsel  -o -b",
-    ["*"] = "xsel  -o -b",
-  },
-  cache_enabled = 1,
-}
 vim.o.clipboard = 'unnamedplus'
 
 -- Enable break indent
