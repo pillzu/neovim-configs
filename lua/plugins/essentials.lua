@@ -144,15 +144,6 @@ return {
     end,
   },
   {
-    -- For adding () around words
-    'kylechui/nvim-surround',
-    version = '*', -- Use for stability; omit to use `main` branch for the latest features
-    event = 'VeryLazy',
-    config = function()
-      require('nvim-surround').setup {}
-    end,
-  },
-  {
     -- For auto indenting on creating a new tag
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
@@ -165,8 +156,17 @@ return {
     config = function()
       local bufferline = require 'bufferline'
       bufferline.setup {
-        style_preset = bufferline.style_preset.padded_slant, -- or bufferline.style_preset.minimal,
-        highlights = require("catppuccin.groups.integrations.bufferline").get()
+        options = {
+          style_preset = bufferline.style_preset.padded_slant, -- or bufferline.style_preset.minimal,
+          highlights = require("catppuccin.groups.integrations.bufferline").get(),
+          diagnostics = "nvim_lsp",
+          diagnostics_indicator = function(count, level, diagnostics_dict, context)
+            local icon = level:match("error") and " " or " "
+            return " " .. icon .. count
+          end,
+          color_icons = true, -- whether or not to add the filetype icon highlights
+          show_close_icon = false
+        }
       }
     end,
   },

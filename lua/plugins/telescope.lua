@@ -22,8 +22,10 @@ return {
     },
 
     config = function()
-      -- -@diagnostic disable-next-line: deprecated
-      local vimgrep_arguments = { unpack(require("telescope.config").values.vimgrep_arguments) }
+      local telescope_config = require("telescope.config")
+      -- Check if vimgrep_arguments is not nil before unpacking
+      local vimgrep_arguments = telescope_config.values.vimgrep_arguments or {}
+
       -- I want to search in hidden/dot files.
       table.insert(vimgrep_arguments, "--hidden")
       -- I don't want to search in the `.git` directory.
@@ -46,41 +48,32 @@ return {
           },
         },
         extensions = {
-          file_browser = {
-            theme = "dropdown",
-            hijack_netrw = true,
-          },
-        },
+          -- file_browser = {
+          --   theme = "dropdown",
+          --   hijack_netrw = true,
+          -- },
+        }
       }
 
       -- Enable telescope fzf native, if installed
       pcall(require('telescope').load_extension, 'fzf')
-      -- pcall(require("telescope").load_extension "file_browser")
-
-      vim.api.nvim_set_keymap(
-        "n",
-        "<leader>fb",
-        ":Telescope file_browser<CR>",
-        { noremap = true, desc = "[F]ile [B]rowser" }
-      )
 
       vim.keymap.set('n', '<leader>fo', require('telescope.builtin').oldfiles,
-        { desc = '[F]ind recently [o]pened files' })
+        { desc = '[F]ind recently [o]pened files', silent = true })
       vim.keymap.set('n', '<leader><leader>', require('telescope.builtin').buffers,
-        { desc = '[ ] Find existing buffers' })
-      vim.keymap.set('n', '<leader>gs', require('telescope.builtin').git_status, { desc = 'View [G]it [S]tatus' })
-      vim.keymap.set('n', '<leader>gf', function()
-        if require("obsidian").util.cursor_on_markdown_link() then
-          return "<cmd>ObsidianFollowLink<CR>"
-        else
-          require('telescope.builtin').git_files()
-        end
-      end, { desc = 'Search [G]it [F]iles' })
-      vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [F]iles' })
-      vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = '[F]ind [H]elp' })
-      vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = '[F]ind by [G]rep' })
-      vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[F]ind [D]iagnostics' })
-      vim.keymap.set('n', '<C-n>', ":NvimTreeToggle<CR>", { desc = "nvim-tree: Toggle" })
+        { desc = '[ ] Find existing buffers', silent = true })
+      vim.keymap.set('n', '<leader>gs', require('telescope.builtin').git_status,
+        { desc = 'View [G]it [S]tatus', silent = true })
+      vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files,
+        { desc = 'Search [G]it [F]iles', silent = true })
+      vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files,
+        { desc = '[F]ind [F]iles', silent = true })
+      vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = '[F]ind [H]elp', silent = true })
+      vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep,
+        { desc = '[F]ind by [G]rep', silent = true })
+      vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics,
+        { desc = '[F]ind [D]iagnostics', silent = true })
+      vim.keymap.set('n', '<C-n>', ":NvimTreeToggle<CR>", { desc = "nvim-tree: Toggle", silent = true })
     end
   },
 }

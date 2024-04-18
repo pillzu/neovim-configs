@@ -46,6 +46,12 @@ M.mason_servers = {
         maxPreload = 100000,
         preloadFileSize = 10000,
       },
+      format = {
+        enable = true,
+        defaultConfig = {
+          indent_style = "tab",
+        },
+      },
     },
   },
 }

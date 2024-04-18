@@ -1,5 +1,14 @@
 return {
   {
+    "rose-pine/neovim",
+    opts = {
+      styles = {
+        transparency = true,
+      }
+    },
+    name = "rose-pine"
+  },
+  {
     "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000,
@@ -17,7 +26,6 @@ return {
             scope_color = "mocha",
             colored_indent_levels = true,
           },
-          fidget = true,
         }
       }
     end

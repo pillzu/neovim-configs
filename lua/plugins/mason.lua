@@ -31,13 +31,6 @@ return {
           }
         end,
       },
-
-      -- Useful status updates for LSP
-      {
-        'j-hui/fidget.nvim',
-        tag = 'legacy',
-        config = function() require('fidget').setup({ window = { blend = 0 } }) end
-      }
     },
     config = function()
       --  Use :Afmt to toggle autoformatting on or off
