@@ -41,6 +41,13 @@ return {
   },
 
   {
+    'stevearc/oil.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+
+  {
     'nvim-tree/nvim-tree.lua',
     dependencies = {
       'nvim-tree/nvim-web-devicons',
@@ -150,6 +157,7 @@ return {
     opts = {},
   },
   {
+    -- Get buffers
     'akinsho/bufferline.nvim',
     version = '*',
     dependencies = 'nvim-tree/nvim-web-devicons',
@@ -170,7 +178,4 @@ return {
       }
     end,
   },
-
-  -- preview markdown files
-  { 'ellisonleao/glow.nvim', config = true, cmd = 'Glow' },
 }

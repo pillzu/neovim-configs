@@ -7,7 +7,7 @@ return {
       null_ls.setup {
         sources = {
           builtins.diagnostics.codespell,
-          -- builtins.diagnostics.eslint_d,
+          builtins.diagnostics.eslint_d,
           builtins.formatting.rustywind,
         }
       }

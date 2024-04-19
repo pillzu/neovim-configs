@@ -2,9 +2,6 @@ return {
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
-    dependencies = {
-      'codota/tabnine-nvim',
-    },
     opts = {
       options = {
         theme = "catppuccin",
@@ -17,7 +14,6 @@ return {
         },
         lualine_b = { 'filename', 'branch' },
         lualine_c = { 'fileformat' },
-        lualine_x = { 'tabnine' },
         lualine_y = { 'filetype', 'progress' },
         lualine_z = {
           { 'location', separator = { right = '' }, left_padding = 2 },
