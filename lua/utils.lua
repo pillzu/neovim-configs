@@ -46,4 +46,10 @@ M.on_attach = function(_, bufnr)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
 end
+
+M.cmd_exists = function(cmd)
+  local ok = os.execute("command -v " .. cmd .. " >/dev/null 2>&1")
+  return ok == 0
+end
+
 return M

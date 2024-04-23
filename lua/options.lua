@@ -3,6 +3,7 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 local opt = vim.opt
+local utils = require 'utils'
 
 -- indenting
 opt.expandtab = true
@@ -28,20 +29,37 @@ vim.wo.number = true
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
--- Combine OS and neovim clipboard
-vim.g.clipboard = {
-  name = "xsel",
-  copy = {
-    ["+"] = "xsel --nodetach -i -b",
-    ["*"] = "xsel --nodetach -i -p",
-  },
-  paste = {
-    ["+"] = "xsel  -o -b",
-    ["*"] = "xsel  -o -b",
-  },
-  cache_enabled = 1,
-}
-vim.o.clipboard = 'unnamedplus'
+-- Determine clipboard command based on availability
+if utils.cmd_exists("xsel") then
+  vim.g.clipboard = {
+    name = "xsel",
+    copy = {
+      ["+"] = "xsel --nodetach -i -b",
+      ["*"] = "xsel --nodetach -i -p",
+    },
+    paste = {
+      ["+"] = "xsel -o -b",
+      ["*"] = "xsel -o -b",
+    },
+    cache_enabled = 1,
+  }
+elseif utils.cmd_exists("wl-copy") then
+  vim.g.clipboard = {
+    name = "wl-clipboard",
+    copy = {
+      ["+"] = "wl-copy",
+      ["*"] = "wl-copy --primary",
+    },
+    paste = {
+      ["+"] = "wl-paste",
+      ["*"] = "wl-paste --primary",
+    },
+    cache_enabled = 1,
+  }
+end
+
+-- Set clipboard settings
+-- vim.o.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.o.breakindent = true
