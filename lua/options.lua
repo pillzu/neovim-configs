@@ -88,4 +88,4 @@ opt.splitbelow = true
 -- NOTE: Careful! Terminal must support this
 vim.o.termguicolors = true
 
-vim.cmd.colorscheme "rose-pine"
+vim.cmd.colorscheme "dracula"

@@ -9,6 +9,12 @@ return {
     name = "rose-pine"
   },
   {
+    'Mofiqul/dracula.nvim',
+    opts = {
+      transparent_bg = true,
+    }
+  },
+  {
     "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000,
