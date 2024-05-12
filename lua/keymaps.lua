@@ -53,3 +53,9 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous dia
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
+-- Neorg
+vim.keymap.set('n', '<leader>no', ':Neorg index<CR>',
+  { desc = '[Neorg] Open Neorg default index', silent = true, noremap = true })
+vim.keymap.set('n', '<leader>nt', ':Neorg journal today<CR>',
+  { desc = '[Neorg] Open Journal For today', silent = true, noremap = true })

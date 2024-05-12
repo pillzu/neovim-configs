@@ -2,6 +2,9 @@ return {
   {
     "vhyrro/luarocks.nvim",
     priority = 1000,
+    opts = {
+      rocks = { "magick" }
+    },
     config = true,
   },
   {
@@ -13,10 +16,31 @@ return {
       require("neorg").setup {
         load = {
           ["core.defaults"] = {},
-          ["core.concealer"] = {},
+          ["core.pivot"] = {},
+          ["core.esupports.metagen"] = {
+            config = {
+              type = "empty"
+            }
+          },
+          ["core.summary"] = {
+            config = {
+              strategy = "by_path"
+            }
+          },
+          ["core.promo"] = {},
+          ["core.itero"] = {},
+          ["core.journal"] = {
+          },
+          ["core.concealer"] = {
+            config = {
+              folds = false,
+              icon_preset = "diamond",
+            }
+          },
           ["core.dirman"] = {
             config = {
               workspaces = {
+                misc = "~/misc",
                 notes = "~/notes",
               },
               default_workspace = "notes",
@@ -24,6 +48,12 @@ return {
           },
         },
       }
+      vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+        pattern = { "*.norg" },
+        callback = function()
+          vim.opt_local.conceallevel = 3
+        end
+      })
     end,
   }
 }
