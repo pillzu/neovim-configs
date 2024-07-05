@@ -6,9 +6,7 @@ return {
       local builtins = require('null-ls').builtins
       null_ls.setup {
         sources = {
-          builtins.diagnostics.codespell,
-          builtins.diagnostics.eslint_d,
-          builtins.formatting.rustywind,
+          builtins.diagnostics.staticcheck,
         }
       }
     end,

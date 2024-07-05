@@ -13,7 +13,11 @@ return {
       require("neorg").setup {
         load = {
           ["core.defaults"] = {},
-          ["core.concealer"] = {},
+          ["core.concealer"] = {
+            config = {
+              folds = false
+            }
+          },
           ["core.dirman"] = {
             config = {
               workspaces = {
@@ -24,6 +28,13 @@ return {
           },
         },
       }
+
+      -- vim.api.nvim_create_augroup('NeorgConcealer', { clear = true })
+      -- vim.api.nvim_create_autocmd("BufEnter", {
+      --   group = "NeorgConcealer",
+      --   pattern = "*.neorg",
+      --   command = "set conceallevel=3"
+      -- })
     end,
   }
 }

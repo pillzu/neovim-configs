@@ -9,6 +9,11 @@ return {
     name = "rose-pine"
   },
   {
+    "scottmckendry/cyberdream.nvim",
+    lazy = false,
+    priority = 1000,
+  },
+  {
     'Mofiqul/dracula.nvim',
     opts = {
       transparent_bg = true,
@@ -20,7 +25,7 @@ return {
     priority = 1000,
     config = function()
       require("catppuccin").setup {
-        flavour = "mocha",             -- latte, frappe, macchiato, mocha
+        flavour = "macchiato",         -- latte, frappe, macchiato, mocha
         transparent_background = true, -- disables setting the background color.
         integrations = {
           cmp = true,

@@ -20,14 +20,18 @@ M.mason_servers = {
 
   prismals = {},
 
-  golangci_lint_ls = {},
   gopls = {},
 
-  pyright = {},
-  pylsp = {},
+  pylsp = {
+    plugins = {
+      -- pyflakes = { enabled = false },
+    },
+  },
 
   bufls = {},
   bashls = {},
+
+  puppet = {},
 
   clangd = {},
   lua_ls = {

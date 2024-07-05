@@ -9,20 +9,39 @@ return {
         opts = {},
       },
     },
-    config = function()
-      require("trouble").setup()
-      vim.keymap.set("n", "<leader>tt", function() require("trouble").open() end, { desc = "Trouble: Toggle" })
-      vim.keymap.set("n", "<leader>tw", function() require("trouble").open("workspace_diagnostics") end,
-        { desc = "Trouble: Workspace Diagnostics" })
-      vim.keymap.set("n", "<leader>td", function() require("trouble").open("document_diagnostics") end,
-        { desc = "Trouble: Document Diagnostics" })
-      vim.keymap.set("n", "<leader>tq", function() require("trouble").open("quickfix") end,
-        { desc = "Trouble: Quick Fix" })
-      vim.keymap.set("n", "<leader>tl", function() require("trouble").open("loclist") end, { desc = "Trouble: Loc list" })
-      vim.keymap.set("n", "gR", function() require("trouble").open("lsp_references") end,
-        { desc = "Trouble: Lsp References" })
-      vim.keymap.set("n", "<leader>tx", function() require("trouble").open("todo") end,
-        { desc = "Trouble: Todo", silent = true })
-    end
+    opts = {},
+    cmd = "Trouble",
+    keys = {
+      {
+        "<leader>td",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Trouble: Diagnostics",
+      },
+      {
+        "<leader>tb",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "Trouble: Buffer Diagnostics",
+      },
+      {
+        "<leader>ts",
+        "<cmd>Trouble symbols toggle focus=true<cr>",
+        desc = "Trouble: Symbols",
+      },
+      {
+        "<leader>tD",
+        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+        desc = "LSP Definitions / references / ... (Trouble)",
+      },
+      {
+        "<leader>tl",
+        "<cmd>Trouble loclist toggle<cr>",
+        desc = "Trouble: Location List",
+      },
+      {
+        "<leader>tq",
+        "<cmd>Trouble qflist toggle<cr>",
+        desc = "Trouble: Quickfix List",
+      },
+    },
   }
 }

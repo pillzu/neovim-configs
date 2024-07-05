@@ -59,7 +59,7 @@ elseif utils.cmd_exists("wl-copy") then
 end
 
 -- Set clipboard settings
--- vim.o.clipboard = 'unnamedplus'
+vim.o.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -88,4 +88,6 @@ opt.splitbelow = true
 -- NOTE: Careful! Terminal must support this
 vim.o.termguicolors = true
 
-vim.cmd.colorscheme "dracula"
+vim.cmd.colorscheme "catppuccin"
+
+vim.o.conceallevel = 3

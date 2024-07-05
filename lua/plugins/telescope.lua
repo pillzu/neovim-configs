@@ -5,20 +5,8 @@ return {
     branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      {
-        -- telescope file browser
-        "nvim-telescope/telescope-file-browser.nvim",
-        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
-        lazy = false,
-      },
-      {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        -- make sure you have `make`
-        build = 'make',
-        cond = function()
-          return vim.fn.executable 'make' == 1
-        end,
-      },
+      { "junegunn/fzf",                             build = "./install --bin" },
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     },
 
     config = function()
@@ -52,6 +40,13 @@ return {
           --   theme = "dropdown",
           --   hijack_netrw = true,
           -- },
+          fzf = {
+            fuzzy = true,                   -- false will only do exact matching
+            override_generic_sorter = true, -- override the generic sorter
+            override_file_sorter = true,    -- override the file sorter
+            case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+            -- the default case_mode is "smart_case"
+          }
         }
       }
 
@@ -73,7 +68,6 @@ return {
         { desc = '[F]ind by [G]rep', silent = true })
       vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics,
         { desc = '[F]ind [D]iagnostics', silent = true })
-      vim.keymap.set('n', '<C-n>', ":NvimTreeToggle<CR>", { desc = "nvim-tree: Toggle", silent = true })
     end
   },
 }
