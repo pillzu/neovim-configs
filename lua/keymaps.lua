@@ -59,3 +59,10 @@ vim.keymap.set('n', '<leader>no', ':Neorg index<CR>',
   { desc = '[Neorg] Open Neorg default index', silent = true, noremap = true })
 vim.keymap.set('n', '<leader>nt', ':Neorg journal today<CR>',
   { desc = '[Neorg] Open Journal For today', silent = true, noremap = true })
+
+-- GPT
+vim.api.nvim_set_keymap('v', '<leader>aa', ':GPTModelsCode<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>aa', ':GPTModelsCode<CR>', { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('v', '<leader>ac', ':GPTModelsChat<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ac', ':GPTModelsChat<CR>', { noremap = true, silent = true })

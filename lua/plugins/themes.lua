@@ -15,7 +15,6 @@ return {
     },
     config = function(_, opts)
       require("dracula").setup(opts)
-
       -- vim.cmd.colorscheme "dracula"
     end
   },
@@ -39,8 +38,6 @@ return {
           },
         }
       }
-
-      vim.cmd.colorscheme "catppuccin"
     end
   },
   {
@@ -55,7 +52,6 @@ return {
         borderless_telescope = true,
         terminal_colors = true,
       })
-      -- vim.cmd("colorscheme cyberdream") -- set the colorscheme
     end,
   }
 }

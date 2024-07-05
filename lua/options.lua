@@ -91,4 +91,6 @@ opt.splitbelow = true
 -- NOTE: Careful! Terminal must support this
 vim.o.termguicolors = true
 
+vim.cmd("colorscheme cyberdream") -- set the colorscheme
+
 vim.g.foldmethod = "manual"
