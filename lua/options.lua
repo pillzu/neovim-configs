@@ -87,7 +87,4 @@ opt.splitbelow = true
 
 -- NOTE: Careful! Terminal must support this
 vim.o.termguicolors = true
-
-vim.cmd.colorscheme "catppuccin"
-
 vim.o.conceallevel = 3

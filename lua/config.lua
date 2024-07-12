@@ -32,6 +32,8 @@ M.mason_servers = {
   bashls = {},
 
   puppet = {},
+  prosemd_lsp = {},
+  markdown_oxide = {},
 
   clangd = {},
   lua_ls = {

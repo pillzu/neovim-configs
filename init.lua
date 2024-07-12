@@ -1,6 +1,11 @@
 -- map space as leader (needed for lazy)
-vim.g.mapleader = ' '
+vim.g.mapleader      = ' '
 vim.g.maplocalleader = ' '
+
+local node_bin       = '/Users/pupadhyay/.nvm/versions/node/v22.4.1/bin'
+vim.cmd("let $PATH = '" .. node_bin .. ":' . $PATH")
+
+require 'options'
 
 -- install Lazy
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -29,5 +34,5 @@ require('lazy').setup({
     change_detection = { enable = false }
   })
 
-require 'options'
 require 'keymaps'
+vim.cmd.colorscheme "catppuccin"
