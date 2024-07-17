@@ -87,6 +87,9 @@ return {
         git = {
           enable = true,
           ignore = true,
+          disable_for_dirs = {
+            "~/workspace/source/"
+          }
         },
         filesystem_watchers = {
           enable = true,
