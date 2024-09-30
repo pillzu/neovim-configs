@@ -2,6 +2,9 @@ return {
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
+    dependencies = {
+      "folke/noice.nvim",
+    },
     opts = {
       options = {
         theme = "catppuccin",

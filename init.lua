@@ -2,9 +2,6 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-local node_bin = '/Users/pupadhyay/.nvm/versions/node/v22.4.1/bin'
-vim.cmd("let $PATH = '" .. node_bin .. ":' . $PATH")
-
 require 'options'
 
 -- install Lazy
@@ -35,4 +32,3 @@ require('lazy').setup({
 
 require 'keymaps'
 vim.cmd.colorscheme 'rose-pine-moon'
-vim.lsp.set_log_level 'debug'

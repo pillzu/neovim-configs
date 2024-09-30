@@ -155,7 +155,7 @@ return {
   {
     -- Get buffers
     'akinsho/bufferline.nvim',
-    tag = "*",
+    version = "*",
     dependencies = 'nvim-tree/nvim-web-devicons',
     config = function()
       local bufferline = require 'bufferline'
@@ -170,7 +170,8 @@ return {
           -- end,
           color_icons = true, -- whether or not to add the filetype icon highlights
           show_close_icon = false
-        }
+        },
+        highlights = require("catppuccin.groups.integrations.bufferline").get(),
       }
     end,
   },
