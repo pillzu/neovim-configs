@@ -7,6 +7,7 @@ return {
       'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
       'rafamadriz/friendly-snippets',
     },
     config = function()
@@ -16,28 +17,27 @@ return {
 
       local function border(hl_name)
         return {
-          { "╭", hl_name },
-          { "─", hl_name },
-          { "╮", hl_name },
-          { "│", hl_name },
-          { "╯", hl_name },
-          { "─", hl_name },
-          { "╰", hl_name },
-          { "│", hl_name },
+          { '╭', hl_name },
+          { '─', hl_name },
+          { '╮', hl_name },
+          { '│', hl_name },
+          { '╯', hl_name },
+          { '─', hl_name },
+          { '╰', hl_name },
+          { '│', hl_name },
         }
       end
-
 
       cmp.setup {
         window = {
           completion = {
             side_padding = 1,
             scrollbar = false,
-            border = border "CmpPMenu",
+            border = border 'CmpPMenu',
           },
           documentation = {
-            border = border "CmpDoc",
-            winhighlight = "Normal:CmpDoc",
+            border = border 'CmpDoc',
+            winhighlight = 'Normal:CmpDoc',
           },
         },
         snippet = {
@@ -81,6 +81,6 @@ return {
           { name = 'path' },
         },
       }
-    end
-  }
+    end,
+  },
 }

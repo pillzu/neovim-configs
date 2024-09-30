@@ -26,7 +26,6 @@ M.on_attach = function(_, bufnr)
 
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-  nmap('rn', vim.lsp.buf.rename, '[R]e[n]ame')
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
@@ -49,8 +48,9 @@ M.on_attach = function(_, bufnr)
 end
 
 M.cmd_exists = function(cmd)
-  local ok = os.execute("command -v " .. cmd .. " >/dev/null 2>&1")
+  local ok = os.execute('command -v ' .. cmd .. ' >/dev/null 2>&1')
   return ok == 0
 end
+
 
 return M

@@ -53,14 +53,3 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous dia
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
-
--- Neorg
-vim.keymap.set('n', '<leader>nn', ":Neorg index<CR>", { desc = 'Open Neorg index', silent = true, noremap = true })
-
--- Ollama
--- Both visual and normal mode for each, so you can open with a visual selection or without.
-vim.api.nvim_set_keymap('v', '<leader>a', ':GPTModelsCode<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>a', ':GPTModelsCode<CR>', { noremap = true })
-
-vim.api.nvim_set_keymap('v', '<leader>cc', ':GPTModelsChat<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>cc', ':GPTModelsChat<CR>', { noremap = true })

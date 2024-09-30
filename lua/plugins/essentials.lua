@@ -2,8 +2,6 @@ return {
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
-  -- 'dstein64/vim-startuptime', -- NOTE: Only when testing
-
   -- tmux <-> vim navigation
   {
     "alexghergh/nvim-tmux-navigation",
@@ -157,19 +155,19 @@ return {
   {
     -- Get buffers
     'akinsho/bufferline.nvim',
-    version = '*',
+    tag = "*",
     dependencies = 'nvim-tree/nvim-web-devicons',
     config = function()
       local bufferline = require 'bufferline'
       bufferline.setup {
         options = {
-          style_preset = bufferline.style_preset.padded_slant, -- or bufferline.style_preset.minimal,
-          highlights = require("catppuccin.groups.integrations.bufferline").get(),
+          style_preset = bufferline.style_preset.slant, -- or bufferline.style_preset.minimal,
+          themable = true,
           diagnostics = "nvim_lsp",
-          diagnostics_indicator = function(count, level, diagnostics_dict, context)
-            local icon = level:match("error") and " " or " "
-            return " " .. icon .. count
-          end,
+          -- diagnostics_indicator = function(count, level, diagnostics_dict, context)
+          --   local icon = level:match("error") and " " or " "
+          --   return " " .. icon .. count
+          -- end,
           color_icons = true, -- whether or not to add the filetype icon highlights
           show_close_icon = false
         }

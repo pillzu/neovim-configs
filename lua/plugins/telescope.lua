@@ -56,14 +56,15 @@ return {
       vim.keymap.set('n', '<leader>fo', require('telescope.builtin').oldfiles,
         { desc = '[F]ind recently [o]pened files', silent = true })
       vim.keymap.set('n', '<leader><leader>', require('telescope.builtin').buffers,
-        { desc = '[ ] Find existing buffers', silent = true })
+        { desc = '[F]ind existing buffers', silent = true })
       vim.keymap.set('n', '<leader>gs', require('telescope.builtin').git_status,
         { desc = 'View [G]it [S]tatus', silent = true })
       vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files,
         { desc = 'Search [G]it [F]iles', silent = true })
       vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files,
         { desc = '[F]ind [F]iles', silent = true })
-      vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = '[F]ind [H]elp', silent = true })
+      vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags,
+        { desc = '[F]ind [H]elp', silent = true })
       vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep,
         { desc = '[F]ind by [G]rep', silent = true })
       vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics,
