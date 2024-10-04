@@ -1,21 +1,62 @@
 local M = {}
 -- servers installed by mason and mason lsp config
-M.mason_ensure_installed = {
-  'bashls',
-  'docker_compose_language_service',
-  'dockerls',
-  'gopls',
-  'jdtls',
-  'lua_ls',
-  'markdown_oxide',
-  'prosemd_lsp',
-  'puppet',
-  'pylsp',
-  'rust_analyzer',
-  'stylua',
-  'svelte',
-  'tailwindcss',
-  'ts_ls',
+M.mason_servers = {
+  -- docker
+  docker_compose_language_service = {},
+  dockerls = {},
+
+  -- go
+  gopls = {
+    gopls = {
+      gofumpt = true,
+    }
+  },
+
+  bashls = {},
+
+  puppet = {},
+  prosemd_lsp = {},
+  markdown_oxide = {},
+  harper_ls = {},
+
+  -- python
+  pylsp = {},
+  -- ruff_lsp = {},
+  -- pyright = {
+  --   python = {
+  --     autoSearchPaths = false,
+  --     diagnosticMode = "openFilesOnly",
+  --     useLibraryCodeForTypes = false
+  --   }
+  -- },
+
+  stylua = {},
+  lua_ls = {
+    settings = {
+      Lua = {
+        diagnostics = {
+          globals = { 'vim' },
+        },
+        telemetry = { enable = false },
+        workspace = {
+          checkThirdParty = false,
+          library = {
+            [vim.fn.expand '$VIMRUNTIME/lua'] = true,
+            [vim.fn.expand '$VIMRUNTIME/lua/vim/lsp'] = true,
+            [vim.fn.stdpath 'data' .. '/lazy/lazy.nvim/lua/lazy'] = true,
+          },
+          maxPreload = 100000,
+          preloadFileSize = 10000,
+        },
+        format = {
+          enable = true,
+          defaultConfig = {
+            indent_style = 'tab',
+          },
+        },
+      },
+    },
+  },
 }
 
 -- Tree-sitter-ensure-installed configuration
