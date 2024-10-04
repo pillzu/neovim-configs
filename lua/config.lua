@@ -6,7 +6,11 @@ M.mason_servers = {
   dockerls = {},
 
   -- go
-  gopls = {},
+  gopls = {
+    gopls = {
+      gofumpt = true,
+    }
+  },
 
   bashls = {},
 
