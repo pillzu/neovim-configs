@@ -1,6 +1,10 @@
 local M = {}
 -- servers installed by mason and mason lsp config
 M.mason_servers = {
+  -- HTML/CSS
+  tailwindcss = {},
+  svelte = {},
+
   -- docker
   docker_compose_language_service = {},
   dockerls = {},
@@ -17,14 +21,6 @@ M.mason_servers = {
 
   -- python
   pylsp = {},
-  -- ruff_lsp = {},
-  -- pyright = {
-  --   python = {
-  --     autoSearchPaths = false,
-  --     diagnosticMode = "openFilesOnly",
-  --     useLibraryCodeForTypes = false
-  --   }
-  -- },
 
   stylua = {},
   lua_ls = {
