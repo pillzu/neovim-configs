@@ -97,3 +97,6 @@ end, { nargs = 0 })
 vim.cmd [[ autocmd BufWritePre * lua if vim.g.afmt_enabled then vim.lsp.buf.format() end ]]
 
 -- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
+
+-- This sets the version of java that will run the LSP. This is not necessarily the same as the one that builds/runs a project.
+vim.env.JAVA_HOME = "/usr/lib/jvm/java-17-openjdk"

@@ -19,6 +19,10 @@ M.mason_servers = {
   markdown_oxide = {},
   harper_ls = {},
 
+  jdtls = {
+
+  },
+
   -- python
   pylsp = {},
 
