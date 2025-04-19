@@ -9,10 +9,8 @@ return {
         sources = {
           builtins.diagnostics.staticcheck,
           builtins.diagnostics.markdownlint,
-          builtins.diagnostics.markdownlint_cli2,
           builtins.formatting.markdownlint,
           builtins.formatting.codespell,
-          builtins.formatting.prettierd,
         },
       }
     end,

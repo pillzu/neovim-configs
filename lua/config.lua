@@ -20,7 +20,6 @@ M.mason_servers = {
   harper_ls = {},
 
   jdtls = {
-
   },
 
   -- python
