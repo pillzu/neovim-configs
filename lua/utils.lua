@@ -53,4 +53,26 @@ M.cmd_exists = function(cmd)
 end
 
 
+M.windsurf_status = function()
+  local status = require('codeium.virtual_text').status()
+
+  if status.state == 'idle' then
+    -- Output was cleared, for example when leaving insert mode
+    return ' Idling'
+  end
+
+  if status.state == 'waiting' then
+    -- Waiting for response
+    return " Generating..."
+  end
+
+  if status.state == 'completions' and status.total > 0 then
+    return string.format(' %d/%d', status.current, status.total)
+  end
+  vim.notify("I ran")
+
+  return ' 0 '
+end
+
+
 return M

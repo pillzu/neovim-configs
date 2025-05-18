@@ -141,7 +141,7 @@ return {
         sort_by = 'case_sensitive',
         on_attach = my_on_attach,
       }
-      vim.keymap.set('n', '<C-n>', ":NvimTreeToggle<CR>", { desc = "nvim-tree: Toggle", silent = true })
+
       vim.keymap.set('n', '<C-n>', ":NvimTreeToggle<CR>", { desc = "nvim-tree: Toggle", silent = true })
     end,
   },
