@@ -20,6 +20,7 @@ return {
     end
   },
 
+
   -- maximize and restore current window
   'szw/vim-maximizer',
 
@@ -33,6 +34,7 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     ---@module "ibl"
+    ---@diagnostic disable-next-line: undefined-doc-name
     ---@type ibl.config
     opts = {},
   },
@@ -142,7 +144,7 @@ return {
         on_attach = my_on_attach,
       }
 
-      vim.keymap.set('n', '<C-n>', ":NvimTreeToggle<CR>", { desc = "nvim-tree: Toggle", silent = true })
+      vim.keymap.set('n', '<leader>n', ":NvimTreeToggle<CR>", { desc = "nvim-tree: Toggle", silent = true })
     end,
   },
   {
