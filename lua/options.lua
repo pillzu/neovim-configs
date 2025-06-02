@@ -87,7 +87,7 @@ opt.splitbelow = true
 
 -- NOTE: Careful! Terminal must support this
 vim.o.termguicolors = true
-vim.o.conceallevel = 3
+vim.o.conceallevel = 0
 
 vim.g.afmt_enabled = true
 vim.api.nvim_create_user_command('Afmt', function()
@@ -95,5 +95,3 @@ vim.api.nvim_create_user_command('Afmt', function()
   print("Autoformatting is " .. (vim.g.afmt_enabled and "enabled" or "disabled"))
 end, { nargs = 0 })
 vim.cmd [[ autocmd BufWritePre * lua if vim.g.afmt_enabled then vim.lsp.buf.format() end ]]
-
--- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]

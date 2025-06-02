@@ -1,6 +1,9 @@
 return {
   {
     'neovim/nvim-lspconfig',
+    opts = {
+      inlay_hints = { enabled = true },
+    },
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
       { 'williamboman/mason.nvim', config = true },
@@ -53,6 +56,7 @@ return {
         end,
       })
 
+
       local servers = require('config').mason_servers
       local on_attach = require('utils').on_attach
       local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -70,6 +74,24 @@ return {
           end,
         },
       }
+
+      -- local bp_capabilities = vim.lsp.protocol.make_client_capabilities()
+      -- bp_capabilities = vim.tbl_deep_extend('force', bp_capabilities, require('cmp_nvim_lsp').default_capabilities())
+      -- bp_capabilities.textDocument.codeAction = {}
+      -- require("lspconfig").basedpyright.setup {
+      --   basedpyright = {
+      --     analysis = {
+      --       autoSearchPaths = true,
+      --       diagnosticMode = "openFilesOnly",
+      --       typeCheckingMode = "standard",
+      --       useLibraryCodeForTypes = false,
+      --     }
+      --   },
+      --   capabilities = bp_capabilities,
+      --   root_dir = function()
+      --     return vim.fn.getcwd()
+      --   end,
+      -- }
     end,
   },
 }
