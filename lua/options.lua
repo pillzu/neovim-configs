@@ -96,3 +96,10 @@ local java_home = "/usr/lib/jvm/java-17-openjdk"
 if vim.fn.isdirectory(java_home) == 1 then
   vim.env.JAVA_HOME = java_home
 end
+
+vim.g.afmt_enabled = true
+vim.api.nvim_create_user_command('Afmt', function()
+  vim.g.afmt_enabled = not vim.g.afmt_enabled
+  print("Autoformatting is " .. (vim.g.afmt_enabled and "enabled" or "disabled"))
+end, { nargs = 0 })
+vim.cmd [[ autocmd BufWritePre * lua if vim.g.afmt_enabled then vim.lsp.buf.format() end ]]

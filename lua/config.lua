@@ -7,8 +7,11 @@ M.mason_servers = {
 
   -- go
   gopls = {
-    gopls = {
-      gofumpt = true,
+    settings = {
+      gopls = {
+        gofumpt = true,
+        staticcheck = true,
+      }
     }
   },
 
@@ -21,14 +24,6 @@ M.mason_servers = {
 
   -- python
   pylsp = {},
-  -- ruff_lsp = {},
-  -- pyright = {
-  --   python = {
-  --     autoSearchPaths = false,
-  --     diagnosticMode = "openFilesOnly",
-  --     useLibraryCodeForTypes = false
-  --   }
-  -- },
 
   stylua = {},
   lua_ls = {
