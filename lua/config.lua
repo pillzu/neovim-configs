@@ -1,23 +1,25 @@
 local M = {}
 -- servers installed by mason and mason lsp config
 M.mason_ensure_installed = {
-  'tailwindcss',
-  'svelte',
+  'bashls',
   'docker_compose_language_service',
   'dockerls',
   'gopls',
-  'bashls',
-  'puppet',
-  'prosemd_lsp',
-  'markdown_oxide',
   'harper_ls',
   'jdtls',
-  'pylsp',
   'lua_ls',
+  'markdown_oxide',
+  'prosemd_lsp',
+  'puppet',
+  'pylsp',
+  'rust_analyzer',
+  'svelte',
+  'tailwindcss',
+  'ts_ls',
 }
 
 -- Tree-sitter-ensure-installed configuration
-M.ts_ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' }
+M.ts_ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'rust' }
 
 M.dashboard = function()
   local status_ok, alpha = pcall(require, 'alpha')
