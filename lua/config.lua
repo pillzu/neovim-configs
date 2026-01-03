@@ -5,7 +5,6 @@ M.mason_ensure_installed = {
   'docker_compose_language_service',
   'dockerls',
   'gopls',
-  'harper_ls',
   'jdtls',
   'lua_ls',
   'markdown_oxide',
@@ -13,6 +12,7 @@ M.mason_ensure_installed = {
   'puppet',
   'pylsp',
   'rust_analyzer',
+  'stylua',
   'svelte',
   'tailwindcss',
   'ts_ls',
@@ -60,7 +60,7 @@ M.dashboard = function()
     dashboard.button('q', '❌  Quit Neovim', ':qa<CR>'),
   }
 
-  dashboard.section.footer.val = "Never think you ain't gonna do it :)"
+  dashboard.section.footer.val = 'Act, Adapt, Conquer!'
 
   dashboard.section.footer.opts.hl = 'Type'
   dashboard.section.header.opts.hl = 'Include'

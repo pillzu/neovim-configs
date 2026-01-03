@@ -12,6 +12,10 @@ return {
     "scottmckendry/cyberdream.nvim",
     lazy = false,
     priority = 1000,
+    opts = {
+      transparent = true,
+      saturation = 0.0
+    }
   },
   {
     'Mofiqul/dracula.nvim',

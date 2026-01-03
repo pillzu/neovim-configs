@@ -172,7 +172,7 @@ return {
           color_icons = true, -- whether or not to add the filetype icon highlights
           show_close_icon = false
         },
-        highlights = require("catppuccin.groups.integrations.bufferline").get(),
+        highlights = require("catppuccin.special.bufferline").get_theme(),
       }
     end,
   },

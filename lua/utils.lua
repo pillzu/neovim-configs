@@ -18,7 +18,7 @@ M.on_attach = function(_, bufnr)
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-  nmap('gs', vim.lsp.buf.signature_help, '[ zelfstandig [S]ignature help')
+  nmap('gs', vim.lsp.buf.signature_help, '[S]ignature help')
   nmap('<leader>gD', vim.lsp.buf.type_definition, '[G]oto Type [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('<leader>gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
@@ -42,27 +42,6 @@ end
 M.cmd_exists = function(cmd)
   local ok = os.execute('command -v ' .. cmd .. ' >/dev/null 2>&1')
   return ok == 0
-end
-
-
-M.windsurf_status = function()
-  local status = require('codeium.virtual_text').status()
-
-  if status.state == 'idle' then
-    -- Output was cleared, for example when leaving insert mode
-    return ' Idling'
-  end
-
-  if status.state == 'waiting' then
-    -- Waiting for response
-    return " Generating..."
-  end
-
-  if status.state == 'completions' and status.total > 0 then
-    return string.format(' %d/%d', status.current, status.total)
-  end
-
-  return ' 0 '
 end
 
 return M

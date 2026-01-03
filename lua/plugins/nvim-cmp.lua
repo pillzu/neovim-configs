@@ -13,7 +13,7 @@ return {
       'hrsh7th/cmp-vsnip',
       'hrsh7th/cmp-nvim-lua',
       'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-nvim-lsp-signature-help'
+      'hrsh7th/cmp-nvim-lsp-signature-help',
     },
     config = function()
       local cmp = require 'cmp'
@@ -80,15 +80,14 @@ return {
           end, { 'i', 's' }),
         },
         sources = {
-          { name = 'buffer',                 keyword_length = 2 }, -- source current buffer
-          { name = 'calc' },                                       -- source for mat
-          { name = 'codeium' },
+          { name = 'buffer', keyword_length = 2 }, -- source current buffer
+          { name = 'calc' }, -- source for mat
           { name = 'luasnip' },
-          { name = 'nvim_lsp',               keyword_length = 3 }, -- from language server
-          { name = 'nvim_lsp_signature_help' },                    -- display function signatures with current parameter emphasized
-          { name = 'nvim_lua',               keyword_length = 2 }, -- complete neovim's Lua runtime API such vim.lsp.*
-          { name = 'path' },                                       -- file paths
-          { name = 'vsnip',                  keyword_length = 2 }, -- nvim-cmp source for vim-vsnip
+          { name = 'nvim_lsp', keyword_length = 3 }, -- from language server
+          { name = 'nvim_lsp_signature_help' }, -- display function signatures with current parameter emphasized
+          { name = 'nvim_lua', keyword_length = 2 }, -- complete neovim's Lua runtime API such vim.lsp.*
+          { name = 'path' }, -- file paths
+          { name = 'vsnip', keyword_length = 2 }, -- nvim-cmp source for vim-vsnip
         },
       }
     end,
