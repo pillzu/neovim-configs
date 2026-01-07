@@ -20,7 +20,6 @@ return {
     end
   },
 
-
   -- maximize and restore current window
   'szw/vim-maximizer',
 
@@ -152,6 +151,35 @@ return {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
     opts = {},
+  },
+  {
+    -- Get buffers
+    'akinsho/bufferline.nvim',
+    version = "*",
+    dependencies = { 'nvim-tree/nvim-web-devicons', "catppuccin/nvim" },
+    init = function()
+      local bufline = require("catppuccin.special.bufferline")
+      function bufline.get()
+        return bufline.get_theme()
+      end
+    end,
+    config = function()
+      local bufferline = require 'bufferline'
+      bufferline.setup {
+        options = {
+          style_preset = bufferline.style_preset.slant, -- or bufferline.style_preset.minimal,
+          themable = true,
+          diagnostics = "nvim_lsp",
+          -- diagnostics_indicator = function(count, level, diagnostics_dict, context)
+          --   local icon = level:match("error") and " " or " "
+          --   return " " .. icon .. count
+          -- end,
+          color_icons = true, -- whether or not to add the filetype icon highlights
+          show_close_icon = false
+        },
+        highlights = require("catppuccin.special.bufferline").get(),
+      }
+    end,
   },
   {
     'NvChad/nvim-colorizer.lua',
