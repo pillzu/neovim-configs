@@ -29,6 +29,7 @@ return {
         transparent_background = true, -- disables setting the background color.
         integrations = {
           cmp = true,
+          bufferline = true,
           gitsigns = true,
           nvimtree = true,
           alpha = true,

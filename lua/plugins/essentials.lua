@@ -20,7 +20,6 @@ return {
     end
   },
 
-
   -- maximize and restore current window
   'szw/vim-maximizer',
 
@@ -157,7 +156,13 @@ return {
     -- Get buffers
     'akinsho/bufferline.nvim',
     version = "*",
-    dependencies = 'nvim-tree/nvim-web-devicons',
+    dependencies = { 'nvim-tree/nvim-web-devicons', "catppuccin/nvim" },
+    init = function()
+      local bufline = require("catppuccin.special.bufferline")
+      function bufline.get()
+        return bufline.get_theme()
+      end
+    end,
     config = function()
       local bufferline = require 'bufferline'
       bufferline.setup {
@@ -172,7 +177,7 @@ return {
           color_icons = true, -- whether or not to add the filetype icon highlights
           show_close_icon = false
         },
-        highlights = require("catppuccin.groups.integrations.bufferline").get(),
+        highlights = require("catppuccin.special.bufferline").get(),
       }
     end,
   },

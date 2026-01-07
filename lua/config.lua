@@ -1,22 +1,20 @@
 local M = {}
 M.mason_ensure_installed = {
-  'tailwindcss',
-  'svelte',
+  'bashls',
   'docker_compose_language_service',
   'dockerls',
   'gopls',
-  'bashls',
-  'puppet',
-  'prosemd_lsp',
-  'markdown_oxide',
-  'harper_ls',
-  'jdtls',
-  'pylsp',
   'lua_ls',
+  'markdown_oxide',
+  'prosemd_lsp',
+  'puppet',
+  'pylsp',
+  'stylua',
+  'tailwindcss',
 }
 
 -- Tree-sitter-ensure-installed configuration
-M.ts_ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' }
+M.ts_ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'rust' }
 
 M.dashboard = function()
   local status_ok, alpha = pcall(require, 'alpha')
@@ -57,7 +55,7 @@ M.dashboard = function()
     dashboard.button('q', '❌  Quit Neovim', ':qa<CR>'),
   }
 
-  dashboard.section.footer.val = "Never think you ain't gonna do it :)"
+  dashboard.section.footer.val = 'Act, Adapt, Conquer!'
 
   dashboard.section.footer.opts.hl = 'Type'
   dashboard.section.header.opts.hl = 'Include'

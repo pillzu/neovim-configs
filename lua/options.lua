@@ -14,10 +14,10 @@ opt.softtabstop = 2
 
 opt.cursorline = true
 
-opt.background = "dark"
+opt.background = 'dark'
 
 -- disable nvim information
-opt.shortmess:append "sI"
+opt.shortmess:append 'sI'
 
 -- Set highlight on search
 vim.o.hlsearch = false
@@ -30,29 +30,29 @@ vim.wo.number = true
 vim.o.mouse = 'a'
 
 -- Determine clipboard command based on availability
-if utils.cmd_exists("xsel") then
+if utils.cmd_exists 'xsel' then
   vim.g.clipboard = {
-    name = "xsel",
+    name = 'xsel',
     copy = {
-      ["+"] = "xsel --nodetach -i -b",
-      ["*"] = "xsel --nodetach -i -p",
+      ['+'] = 'xsel --nodetach -i -b',
+      ['*'] = 'xsel --nodetach -i -p',
     },
     paste = {
-      ["+"] = "xsel -o -b",
-      ["*"] = "xsel -o -b",
+      ['+'] = 'xsel -o -b',
+      ['*'] = 'xsel -o -b',
     },
     cache_enabled = 1,
   }
-elseif utils.cmd_exists("wl-copy") then
+elseif utils.cmd_exists 'wl-copy' then
   vim.g.clipboard = {
-    name = "wl-clipboard",
+    name = 'wl-clipboard',
     copy = {
-      ["+"] = "wl-copy",
-      ["*"] = "wl-copy --primary",
+      ['+'] = 'wl-copy',
+      ['*'] = 'wl-copy --primary',
     },
     paste = {
-      ["+"] = "wl-paste",
-      ["*"] = "wl-paste --primary",
+      ['+'] = 'wl-paste',
+      ['*'] = 'wl-paste --primary',
     },
     cache_enabled = 1,
   }
@@ -92,6 +92,10 @@ vim.o.conceallevel = 0
 vim.g.afmt_enabled = true
 vim.api.nvim_create_user_command('Afmt', function()
   vim.g.afmt_enabled = not vim.g.afmt_enabled
-  print("Autoformatting is " .. (vim.g.afmt_enabled and "enabled" or "disabled"))
+  print('Autoformatting is ' .. (vim.g.afmt_enabled and 'enabled' or 'disabled'))
 end, { nargs = 0 })
 vim.cmd [[ autocmd BufWritePre * lua if vim.g.afmt_enabled then vim.lsp.buf.format() end ]]
+
+-- Trailing whitespace
+vim.o.list = true
+vim.o.listchars = 'tab:» ,trail:•'
