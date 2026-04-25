@@ -19,7 +19,7 @@ M.mason_ensure_installed = {
 }
 
 -- Tree-sitter-ensure-installed configuration
-M.ts_ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'rust' }
+M.ts_ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' }
 
 M.dashboard = function()
   local status_ok, alpha = pcall(require, 'alpha')

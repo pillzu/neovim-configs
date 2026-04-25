@@ -8,11 +8,9 @@ return {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
+      'hrsh7th/cmp-calc',
       'rafamadriz/friendly-snippets',
-      'hrsh7th/vim-vsnip',
-      'hrsh7th/cmp-vsnip',
       'hrsh7th/cmp-nvim-lua',
-      'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-nvim-lsp-signature-help',
     },
     config = function()
@@ -44,6 +42,26 @@ return {
             border = border 'CmpDoc',
             winhighlight = 'Normal:CmpDoc',
           },
+        },
+        formatting = {
+          fields = { 'kind', 'abbr', 'menu' },
+          format = function(entry, vim_item)
+            local kind_icons = {
+              Text = '󰉿', Method = '󰆧', Function = '󰊕', Constructor = '',
+              Field = '󰜢', Variable = '󰀫', Class = '󰠱', Interface = '',
+              Module = '', Property = '󰜢', Unit = '󰑭', Value = '󰎠',
+              Enum = '', Keyword = '󰌋', Snippet = '', Color = '󰏘',
+              File = '󰈙', Reference = '󰈇', Folder = '󰉋', EnumMember = '',
+              Constant = '󰏿', Struct = '󰙅', Event = '', Operator = '󰆕',
+              TypeParameter = '󰬛',
+            }
+            vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind] or '', vim_item.kind)
+            vim_item.menu = ({
+              nvim_lsp = '[LSP]', luasnip = '[Snippet]', buffer = '[Buffer]',
+              path = '[Path]', calc = '[Calc]', nvim_lua = '[Lua]',
+            })[entry.source.name] or ''
+            return vim_item
+          end,
         },
         snippet = {
           expand = function(args)
@@ -80,14 +98,14 @@ return {
           end, { 'i', 's' }),
         },
         sources = {
-          { name = 'buffer', keyword_length = 2 }, -- source current buffer
-          { name = 'calc' }, -- source for mat
-          { name = 'luasnip' },
-          { name = 'nvim_lsp', keyword_length = 3 }, -- from language server
-          { name = 'nvim_lsp_signature_help' }, -- display function signatures with current parameter emphasized
-          { name = 'nvim_lua', keyword_length = 2 }, -- complete neovim's Lua runtime API such vim.lsp.*
-          { name = 'path' }, -- file paths
-          { name = 'vsnip', keyword_length = 2 }, -- nvim-cmp source for vim-vsnip
+          -- LSP first (highest priority) so Text/Buffer comes after
+          { name = 'nvim_lsp',                 priority = 1000, keyword_length = 3 },
+          { name = 'nvim_lsp_signature_help',  priority = 900 },
+          { name = 'luasnip',                  priority = 800 },
+          { name = 'nvim_lua',                 priority = 400, keyword_length = 2 },
+          { name = 'buffer',                   priority = 300, keyword_length = 2 },
+          { name = 'path',                     priority = 200 },
+          { name = 'calc',                     priority = 100 },
         },
       }
     end,

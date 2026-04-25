@@ -27,8 +27,8 @@ return {
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
 
-  -- Additional lua configuration, makes nvim stuff amazing!
-  { 'folke/neodev.nvim',    opts = {} },
+  -- Modern Lua LSP enhancements (replaces deprecated neodev)
+  { 'folke/lazydev.nvim', opts = { library = { { path = "${3rd}/luv/library", words = { "vim%.uv" } } } } },
 
   {
     "lukas-reineke/indent-blankline.nvim",
@@ -154,48 +154,54 @@ return {
     opts = {},
   },
   {
-    -- Get buffers
-    'akinsho/bufferline.nvim',
-    version = "*",
-    dependencies = 'nvim-tree/nvim-web-devicons',
-    config = function()
-      local bufferline = require 'bufferline'
-      bufferline.setup {
-        options = {
-          style_preset = bufferline.style_preset.slant, -- or bufferline.style_preset.minimal,
-          themable = true,
-          diagnostics = "nvim_lsp",
-          -- diagnostics_indicator = function(count, level, diagnostics_dict, context)
-          --   local icon = level:match("error") and " " or " "
-          --   return " " .. icon .. count
-          -- end,
-          color_icons = true, -- whether or not to add the filetype icon highlights
-          show_close_icon = false
-        },
-        highlights = require("catppuccin.special.bufferline").get_theme(),
-      }
-    end,
-  },
-  {
     'NvChad/nvim-colorizer.lua',
-    config = function()
-      require("colorizer").setup {
-        user_default_options = {
-          css = true,                                     -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-          tailwind = true,                                -- Enable tailwind colors
-          -- parsers can contain values used in |user_default_options|
-          sass = { enable = true, parsers = { "css" }, }, -- Enable sass colors
-          virtualtext = "■",
-          -- update color values even if buffer is not focused
-          -- example use: cmp_menu, cmp_docs
-          always_update = true
-        },
-      }
-    end
+    opts = {
+      user_default_options = {
+        css = true,
+        tailwind = true,
+        sass = { enable = true, parsers = { "css" } },
+        virtualtext = "■",
+        always_update = true,
+      },
+    },
   },
   {
     'folke/todo-comments.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = {},
+  },
+  {
+    'stevearc/conform.nvim',
+    event = 'BufWritePre',
+    config = function()
+      vim.g.afmt_enabled = true
+      vim.api.nvim_create_user_command('Afmt', function()
+        vim.g.afmt_enabled = not vim.g.afmt_enabled
+        print("Autoformatting is " .. (vim.g.afmt_enabled and "enabled" or "disabled"))
+      end, { nargs = 0 })
+
+      require('conform').setup {
+        formatters_by_ft = {
+          lua = { 'stylua' },
+          python = { 'black', 'isort' },
+          rust = { 'rustfmt' },
+          go = { 'gofmt' },
+          javascript = { 'prettier' },
+          typescript = { 'prettier' },
+          typescriptreact = { 'prettier' },
+          svelte = { 'prettier' },
+          markdown = { 'markdownlint' },
+        },
+        format_on_save = function(bufnr)
+          if not vim.g.afmt_enabled then
+            return
+          end
+          return {
+            timeout_ms = 500,
+            lsp_fallback = true,
+          }
+        end,
+      }
+    end,
   },
 }

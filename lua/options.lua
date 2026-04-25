@@ -88,15 +88,11 @@ opt.splitbelow = true
 -- NOTE: Careful! Terminal must support this
 vim.o.termguicolors = true
 vim.o.conceallevel = 3
+vim.o.winborder = 'rounded'   -- nice rounded borders on all floating windows
+vim.o.laststatus = 3          -- global statusline (modern look with lualine)
 
-vim.g.afmt_enabled = true
-vim.api.nvim_create_user_command('Afmt', function()
-  vim.g.afmt_enabled = not vim.g.afmt_enabled
-  print("Autoformatting is " .. (vim.g.afmt_enabled and "enabled" or "disabled"))
-end, { nargs = 0 })
-vim.cmd [[ autocmd BufWritePre * lua if vim.g.afmt_enabled then vim.lsp.buf.format() end ]]
-
--- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
-
--- This sets the version of java that will run the LSP. This is not necessarily the same as the one that builds/runs a project.
-vim.env.JAVA_HOME = "/usr/lib/jvm/java-17-openjdk"
+-- Java LSP (only set if the JDK actually exists on this machine)
+local java_home = "/usr/lib/jvm/java-17-openjdk"
+if vim.fn.isdirectory(java_home) == 1 then
+  vim.env.JAVA_HOME = java_home
+end

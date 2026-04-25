@@ -10,15 +10,11 @@ return {
     },
 
     config = function()
-      local telescope_config = require("telescope.config")
-      -- Check if vimgrep_arguments is not nil before unpacking
-      local vimgrep_arguments = telescope_config.values.vimgrep_arguments or {}
-
-      -- I want to search in hidden/dot files.
-      table.insert(vimgrep_arguments, "--hidden")
-      -- I don't want to search in the `.git` directory.
-      table.insert(vimgrep_arguments, "--glob")
-      table.insert(vimgrep_arguments, "!**/.git/*")
+      -- Modern way to extend rg arguments for hidden files + gitignore
+      local vimgrep_args = {
+        "rg", "--color=never", "--no-heading", "--with-filename",
+        "--line-number", "--column", "--smart-case", "--hidden", "--glob", "!**/.git/*"
+      }
 
       require('telescope').setup {
         pickers = {
@@ -27,11 +23,12 @@ return {
           }
         },
         defaults = {
-          vimgrep_arguments = vimgrep_arguments,
+          vimgrep_arguments = vimgrep_args,
           mappings = {
             i = {
               ['<C-u>'] = false,
               ['<C-d>'] = false,
+              ['<C-t>'] = require('trouble.sources.telescope').open,  -- Send results to Trouble (great for cycling all LSP results)
             },
           },
         },

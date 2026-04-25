@@ -37,7 +37,6 @@ return {
                 automatic_enable = true, -- Automatically enable installed servers
             })
 
-            -- LSP attach autocommands for document highlighting
             vim.api.nvim_create_autocmd('LspAttach', {
                 group = vim.api.nvim_create_augroup('lsp-attach-format', { clear = true }),
                 callback = function(event)
@@ -45,12 +44,12 @@ return {
                     if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
                         local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight',
                             { clear = false })
-                        vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+                        vim.api.nvim_create_autocmd('CursorHold', {
                             buffer = event.buf,
                             group = highlight_augroup,
                             callback = vim.lsp.buf.document_highlight,
                         })
-                        vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+                        vim.api.nvim_create_autocmd('CursorMoved', {
                             buffer = event.buf,
                             group = highlight_augroup,
                             callback = vim.lsp.buf.clear_references,

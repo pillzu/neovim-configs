@@ -33,9 +33,9 @@ function ForceQuit()
   end
 end
 
-vim.api.nvim_set_keymap('n', '<leader>x', ':lua ForceQuit()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Tab>', ':bn<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<S-Tab>', ':bp<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>x', ForceQuit, { desc = 'Close buffer (confirm if modified)' })
+vim.keymap.set('n', '<Tab>', ':bn<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<S-Tab>', ':bp<CR>', { desc = 'Previous buffer' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -54,24 +54,23 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
--- LSP Diagnostics Options Setup
-local sign = function(opts)
-  vim.fn.sign_define(opts.name, {
-    texthl = opts.name,
-    text = opts.text,
-    numhl = '',
-  })
-end
-sign { name = 'DiagnosticSignError', text = '' }
-sign { name = 'DiagnosticSignWarn', text = '' }
-sign { name = 'DiagnosticSignHint', text = '' }
-sign { name = 'DiagnosticSignInfo', text = '' }
+-- LSP Diagnostics Options Setup (modern style)
 vim.diagnostic.config {
-  virtual_text = false,
-  signs = true,
-  update_in_insert = true,
+  virtual_text = {
+    prefix = "●",
+    source = "if_many",
+  },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "󰅚",
+      [vim.diagnostic.severity.WARN]  = "󰀪",
+      [vim.diagnostic.severity.INFO]  = "󰋽",
+      [vim.diagnostic.severity.HINT]  = "󰌶",
+    },
+  },
+  update_in_insert = false,
   underline = true,
-  severity_sort = false,
+  severity_sort = true,
   float = {
     border = 'rounded',
     source = 'always',
@@ -79,8 +78,3 @@ vim.diagnostic.config {
     prefix = '',
   },
 }
-
-vim.cmd [[
-set signcolumn=yes
-autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
-]]

@@ -15,17 +15,33 @@ end
 
 -- Function run when an LSP connects to a buffer
 M.on_attach = function(_, bufnr)
-  nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-  nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-  nmap('gs', vim.lsp.buf.signature_help, '[S]ignature help')
-  nmap('<leader>gD', vim.lsp.buf.type_definition, '[G]oto Type [D]efinition')
+  -- g-family for LSP (consistent navigation + actions)
+  nmap('ga', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  nmap('rn', vim.lsp.buf.rename, '[R]e[n]ame')
+
+  nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+  nmap('gD', require('telescope.builtin').lsp_type_definitions, '[G]oto Type [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-  nmap('<leader>gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+  nmap('gi', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+  nmap('gs', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+  nmap('gws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+  nmap('gK', vim.lsp.buf.signature_help, '[S]ignature [H]elp')
+
+  -- Extra high-value LSP features (g-family)
+  nmap('gih', function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+    vim.lsp.inlay_hint.enable(not enabled, { bufnr = bufnr })
+  end, 'Toggle Inlay Hints')
+
+  nmap('gci', function() require('telescope.builtin').lsp_incoming_calls() end, 'Incoming Calls')
+  nmap('gco', function() require('telescope.builtin').lsp_outgoing_calls() end, 'Outgoing Calls')
+
+  nmap('gcl', function()
+    vim.lsp.codelens.refresh({ bufnr = 0 })
+    vim.lsp.codelens.run()
+  end, 'CodeLens (Refresh + Run)')
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
   nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
   nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
   nmap('<leader>wl', function()
@@ -39,9 +55,13 @@ M.on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
+local cmd_cache = {}
 M.cmd_exists = function(cmd)
+  if cmd_cache[cmd] ~= nil then return cmd_cache[cmd] end
   local ok = os.execute('command -v ' .. cmd .. ' >/dev/null 2>&1')
-  return ok == 0
+  local res = ok == 0
+  cmd_cache[cmd] = res
+  return res
 end
 
 return M

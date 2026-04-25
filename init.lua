@@ -2,11 +2,14 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Lua bytecode cache for much faster startup (Neovim 0.9+)
+vim.loader.enable()
+
 require 'options'
 
 -- install Lazy
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   vim.fn.system {
     'git',
     'clone',
