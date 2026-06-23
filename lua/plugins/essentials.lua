@@ -50,8 +50,9 @@ return {
         api.config.mappings.default_on_attach(bufnr)
       end
 
-      local gwidth = vim.api.nvim_list_uis()[1].width
-      local gheight = vim.api.nvim_list_uis()[1].height
+      local uis = vim.api.nvim_list_uis()
+      local gwidth = uis[1] and uis[1].width or 120
+      local gheight = uis[1] and uis[1].height or 40
       local height = 30
       local width = 80
 
@@ -151,35 +152,6 @@ return {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
     opts = {},
-  },
-  {
-    -- Get buffers
-    'akinsho/bufferline.nvim',
-    version = "*",
-    dependencies = { 'nvim-tree/nvim-web-devicons', "catppuccin/nvim" },
-    init = function()
-      local bufline = require("catppuccin.special.bufferline")
-      function bufline.get()
-        return bufline.get_theme()
-      end
-    end,
-    config = function()
-      local bufferline = require 'bufferline'
-      bufferline.setup {
-        options = {
-          style_preset = bufferline.style_preset.slant, -- or bufferline.style_preset.minimal,
-          themable = true,
-          diagnostics = "nvim_lsp",
-          -- diagnostics_indicator = function(count, level, diagnostics_dict, context)
-          --   local icon = level:match("error") and " " or " "
-          --   return " " .. icon .. count
-          -- end,
-          color_icons = true, -- whether or not to add the filetype icon highlights
-          show_close_icon = false
-        },
-        highlights = require("catppuccin.special.bufferline").get(),
-      }
-    end,
   },
   {
     'NvChad/nvim-colorizer.lua',
