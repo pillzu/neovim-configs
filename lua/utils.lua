@@ -49,6 +49,11 @@ M.on_attach = function(_, bufnr)
   end, '[W]orkspace [L]ist Folders')
   nmap('<leader>fm', vim.lsp.buf.format, '[F]or[m]at Code')
 
+  -- Toggle inlay hints (disabled by default due to 0.11.x bugs)
+  nmap('<leader>ih', function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+  end, '[I]nlay [H]ints Toggle')
+
   -- Create a buffer-local :Format command
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
@@ -58,8 +63,9 @@ end
 local cmd_cache = {}
 M.cmd_exists = function(cmd)
   if cmd_cache[cmd] ~= nil then return cmd_cache[cmd] end
-  local ok = os.execute('command -v ' .. cmd .. ' >/dev/null 2>&1')
-  local res = ok == 0
+  -- vim.fn.executable() is a built-in C check (no shell fork); os.execute()
+  -- previously spawned /bin/sh per call, costing ~50-200ms at startup.
+  local res = vim.fn.executable(cmd) == 1
   cmd_cache[cmd] = res
   return res
 end
