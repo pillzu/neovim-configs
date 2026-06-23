@@ -10,16 +10,31 @@ return {
     },
 
     config = function()
+      -- Heavy directory trees to keep out of file/grep candidate sets. Most are
+      -- gitignored already, but `submodules` is tracked and huge, so prune explicitly.
+      local exclude_globs = {
+        '!**/.git/*', '!**/submodules/*', '!**/target/*',
+        '!**/node_modules/*', '!**/bazel-out/*', '!**/.venv/*',
+      }
+
       -- Modern way to extend rg arguments for hidden files + gitignore
       local vimgrep_args = {
         "rg", "--color=never", "--no-heading", "--with-filename",
-        "--line-number", "--column", "--smart-case", "--hidden", "--glob", "!**/.git/*"
+        "--line-number", "--column", "--smart-case", "--hidden",
       }
+      for _, g in ipairs(exclude_globs) do
+        vim.list_extend(vimgrep_args, { '--glob', g })
+      end
+
+      local find_command = { 'rg', '--files', '--hidden' }
+      for _, g in ipairs(exclude_globs) do
+        vim.list_extend(find_command, { '--glob', g })
+      end
 
       require('telescope').setup {
         pickers = {
           find_files = {
-            find_command = { 'rg', '--files', '--hidden', '-g', '!.git' },
+            find_command = find_command,
           }
         },
         defaults = {
@@ -58,12 +73,15 @@ return {
         { desc = 'View [G]it [S]tatus', silent = true })
       vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files,
         { desc = 'Search [G]it [F]iles', silent = true })
-      vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files,
-        { desc = '[F]ind [F]iles', silent = true })
+      -- NOTE: <leader>ff (files) and <leader>fg (grep) are owned by fzf-lua now
+      -- (plugins/fzf-lua.lua) — much faster on large repos. Telescope keeps the
+      -- LSP/git/diagnostics pickers below.
+      vim.keymap.set('n', '<leader>fF', require('telescope.builtin').find_files,
+        { desc = '[F]ind [F]iles (telescope fallback)', silent = true })
       vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags,
         { desc = '[F]ind [H]elp', silent = true })
-      vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep,
-        { desc = '[F]ind by [G]rep', silent = true })
+      vim.keymap.set('n', '<leader>fG', require('telescope.builtin').live_grep,
+        { desc = '[F]ind by [G]rep (telescope fallback)', silent = true })
       vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics,
         { desc = '[F]ind [D]iagnostics', silent = true })
     end

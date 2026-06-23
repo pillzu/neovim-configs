@@ -59,6 +59,7 @@ return {
             vim_item.menu = ({
               nvim_lsp = '[LSP]', luasnip = '[Snippet]', buffer = '[Buffer]',
               path = '[Path]', calc = '[Calc]', nvim_lua = '[Lua]',
+              grok = '[Grok]',
             })[entry.source.name] or ''
             return vim_item
           end,
@@ -106,8 +107,20 @@ return {
           { name = 'buffer',                   priority = 300, keyword_length = 2 },
           { name = 'path',                     priority = 200 },
           { name = 'calc',                     priority = 100 },
+          -- Grok bespoke Tab completion (AI-powered with rich context from yank + buffers + LSP + git).
+          -- DISABLED: its complete() runs grok.context.gather() synchronously, which shells out to
+          -- blocking `git status`/`git diff` (vim.fn.systemlist) on the UI thread for every trigger.
+          -- In a large repo that freezes Neovim on nearly every keystroke. Re-enable only after the
+          -- source is reworked to gather context asynchronously (and cache/debounce git calls).
+          -- { name = 'grok', priority = 50, keyword_length = 3, group_index = 2 },
         },
       }
+
+      -- Grok completion source registration (safe, idempotent).
+      local grok_cmp_ok, grok_cmp = pcall(require, 'grok.completion')
+      if grok_cmp_ok and grok_cmp and grok_cmp.register then
+        pcall(grok_cmp.register)
+      end
     end,
   },
 }

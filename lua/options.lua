@@ -107,3 +107,6 @@ vim.cmd [[ autocmd BufWritePre * lua if vim.g.afmt_enabled then vim.lsp.buf.form
 -- Trailing whitespace
 vim.o.list = true
 vim.o.listchars = 'tab:» ,trail:•'
+
+-- Disable inlay hints by default (fixes "Invalid 'col': out of range" errors in 0.11.x)
+vim.lsp.inlay_hint.enable(false)

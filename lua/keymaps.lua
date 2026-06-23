@@ -48,6 +48,13 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
+-- Open current line / selection on GitHub (via fugitive + rhubarb's :GBrowse)
+vim.keymap.set('n', '<leader>gh', '<cmd>GBrowse<cr>', { desc = 'Open line in [G]it[H]ub' })
+vim.keymap.set('v', '<leader>gh', ':GBrowse<cr>', { desc = 'Open selection in [G]it[H]ub' })
+-- Bang variant copies the URL to the clipboard instead of opening the browser
+vim.keymap.set('n', '<leader>gH', '<cmd>GBrowse!<cr>', { desc = 'Copy [G]it[H]ub URL of line' })
+vim.keymap.set('v', '<leader>gH', ":GBrowse!<cr>", { desc = 'Copy [G]it[H]ub URL of selection' })
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
