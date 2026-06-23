@@ -30,12 +30,22 @@ return {
                 on_attach = require('utils').on_attach,
             })
 
-            -- Set up Mason and mason-lspconfig
+            -- Set up Mason and mason-lspconfig.
+            -- config.mason_servers is a table keyed by server name with per-server
+            -- opts (settings, etc.). Build the ensure_installed list from its keys
+            -- and apply each server's opts via vim.lsp.config so the settings
+            -- (gopls gofumpt/staticcheck, lua_ls, ...) actually take effect.
+            local servers = require('config').mason_servers
             require('mason').setup()
             require('mason-lspconfig').setup({
-                ensure_installed = require('config').mason_ensure_installed,
+                ensure_installed = vim.tbl_keys(servers),
                 automatic_enable = true, -- Automatically enable installed servers
             })
+            for name, opts in pairs(servers) do
+                if type(opts) == 'table' and next(opts) ~= nil then
+                    vim.lsp.config(name, opts)
+                end
+            end
 
             vim.api.nvim_create_autocmd('LspAttach', {
                 group = vim.api.nvim_create_augroup('lsp-attach-format', { clear = true }),
