@@ -17,7 +17,6 @@ M.mason_servers = {
 
   bashls = {},
 
-  puppet = {},
   prosemd_lsp = {},
   markdown_oxide = {},
   harper_ls = {},
@@ -29,8 +28,11 @@ M.mason_servers = {
   lua_ls = {
     settings = {
       Lua = {
+        runtime = {
+          version = 'LuaJIT',
+        },
         diagnostics = {
-          globals = { 'vim' },
+          globals = { 'vim', 'require' },
         },
         telemetry = { enable = false },
         workspace = {
@@ -55,6 +57,24 @@ M.mason_servers = {
 }
 
 -- Tree-sitter-ensure-installed configuration
-M.ts_ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' }
+-- yaml/toml/json/bash/markdown: no LSP fallback for most of these, so TS is the highlighter.
+M.ts_ensure_installed = {
+  'bash',
+  'c',
+  'cpp',
+  'go',
+  'json',
+  'lua',
+  'markdown',
+  'markdown_inline',
+  'python',
+  'rust',
+  'toml',
+  'tsx',
+  'typescript',
+  'vim',
+  'vimdoc',
+  'yaml',
+}
 
 return M

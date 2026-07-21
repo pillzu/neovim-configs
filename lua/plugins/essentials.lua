@@ -59,7 +59,6 @@ return {
       require('nvim-tree').setup {
         filters = {
           dotfiles = false,
-          exclude = { vim.fn.stdpath 'config' .. '/lua/custom' },
         },
         disable_netrw = true,
         hijack_netrw = true,
@@ -86,9 +85,9 @@ return {
         git = {
           enable = true,
           ignore = true,
-          disable_for_dirs = {
-            "~/workspace/source/"
-          }
+          -- Huge trees (optional work overlay): full-tree git status is unusable.
+          -- Personal: empty. Work: lua/work.lua → nvim_tree_disable_git_dirs.
+          disable_for_dirs = require('work_config').nvim_tree_disable_git_dirs,
         },
         filesystem_watchers = {
           enable = true,

@@ -1,38 +1,11 @@
--- Diffview plugin with auto-refresh for grok CLI integration
--- Automatically refreshes git diffs when grok makes changes
+-- Diffview: refresh on focus only (no recursive FS watcher / git check-ignore spam).
 
--- Helper to check if file is git ignored
-local function is_git_ignored(filepath)
-  vim.fn.system('git check-ignore -q ' .. vim.fn.shellescape(filepath))
-  return vim.v.shell_error == 0
-end
-
--- Update the left pane of diffview
 local function update_diffview_pane()
   pcall(function()
     local lib = require('diffview.lib')
     local view = lib.get_current_view()
     if view then
       view:update_files()
-    end
-  end)
-end
-
--- Register with directory watcher for auto-refresh
-local function setup_directory_watcher()
-  local ok, dir_watcher = pcall(require, 'custom.directory-watcher')
-  if not ok then
-    return
-  end
-
-  dir_watcher.registerOnChangeHandler('diffview', function(filepath, events)
-    -- Check if this is a .git directory change or a non-ignored file
-    local is_in_dot_git_dir = filepath:match('/%.git/') or filepath:match('^%.git/')
-    
-    if is_in_dot_git_dir or not is_git_ignored(filepath) then
-      vim.schedule(function()
-        update_diffview_pane()
-      end)
     end
   end)
 end
@@ -158,10 +131,7 @@ return {
       },
     })
 
-    -- Setup directory watcher for auto-refresh
-    setup_directory_watcher()
-
-    -- Auto-refresh on focus gained
+    -- Refresh when returning to nvim (external edits from other tools)
     vim.api.nvim_create_autocmd('FocusGained', {
       group = vim.api.nvim_create_augroup('DiffviewAutoRefresh', { clear = true }),
       callback = update_diffview_pane,

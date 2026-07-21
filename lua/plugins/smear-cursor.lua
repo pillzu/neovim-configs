@@ -1,8 +1,5 @@
 return {
   "sphamba/smear-cursor.nvim",
-  -- TEMP: disabled to isolate the stray-"A"-in-Telescope-prompt bug. If `gd`
-  -- works clean with this off, smear-cursor is the culprit; re-enable then.
-  enabled = false,
   event = "VeryLazy",
   opts = {
     -- Don't animate the cursor in insert mode. The Telescope/fzf prompt is an

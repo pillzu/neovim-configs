@@ -39,7 +39,11 @@ return {
             require('mason').setup()
             require('mason-lspconfig').setup({
                 ensure_installed = vim.tbl_keys(servers),
-                automatic_enable = true, -- Automatically enable installed servers
+                -- rustaceanvim owns rust-analyzer. If mason also auto-enables it
+                -- you get two RA clients → duplicate gd/gr hits for the same symbol.
+                automatic_enable = {
+                    exclude = { 'rust_analyzer' },
+                },
             })
             for name, opts in pairs(servers) do
                 if type(opts) == 'table' and next(opts) ~= nil then
