@@ -182,7 +182,9 @@ return {
       require('conform').setup {
         formatters_by_ft = {
           lua = { 'stylua' },
-          python = { 'black', 'isort' },
+          -- ruff_format never splits string literals, so it can't emit PEP 701
+          -- f-string wrapping that older interpreters reject. :MasonInstall ruff
+          python = { 'ruff_organize_imports', 'ruff_format' },
           rust = { 'rustfmt' },
           go = { 'gofmt' },
           javascript = { 'prettier' },
