@@ -12,6 +12,9 @@ local M = {}
 
 -- Cached target pane id (e.g. "%3"). Set by find_grok_pane() or attach().
 M._pane = nil
+-- True when the pane was bound explicitly via attach(); such panes skip the
+-- "is it running grok" revalidation so users can bind unusual setups.
+M._manual = false
 
 --- Are we running inside tmux?
 --- @return boolean
@@ -32,34 +35,51 @@ local function tmux(args)
   return vim.trim(res.stdout or ''), nil
 end
 
---- Validate that a pane id still exists.
---- @param pane string
+--- Does a pane's foreground command look like Grok? tmux reports the pane's
+--- foreground process, so a shell that launched grok shows "grok" here.
+--- @param cmd string
 --- @return boolean
-local function pane_alive(pane)
-  if not pane or pane == '' then
-    return false
-  end
-  local out = tmux({ 'list-panes', '-a', '-F', '#{pane_id}' })
-  if not out then
-    return false
-  end
-  for line in (out .. '\n'):gmatch('([^\n]*)\n') do
-    if line == pane then
-      return true
-    end
-  end
-  return false
+local function is_grok_cmd(cmd)
+  return cmd:lower():match('grok') ~= nil
 end
 
---- Discover the Grok pane: the pane in the current window whose foreground command
---- is not nvim. Falls back to the first non-nvim pane anywhere.
+--- Look up a pane's current foreground command; nil if the pane is gone.
+--- @param pane string
+--- @return string|nil
+local function pane_command(pane)
+  if not pane or pane == '' then
+    return nil
+  end
+  local out = tmux({ 'list-panes', '-a', '-F', '#{pane_id} #{pane_current_command}' })
+  if not out then
+    return nil
+  end
+  for line in (out .. '\n'):gmatch('([^\n]*)\n') do
+    local pid, cmd = line:match('^(%%%d+)%s+(.+)$')
+    if pid == pane then
+      return cmd
+    end
+  end
+  return nil
+end
+
+--- Discover the Grok pane: the pane whose foreground command is grok, preferring
+--- the current window over other windows.
 --- @return string|nil pane_id
 function M.find_grok_pane()
   if not in_tmux() then
     return nil
   end
-  if M._pane and pane_alive(M._pane) then
-    return M._pane
+  if M._pane then
+    local cmd = pane_command(M._pane)
+    -- Existence alone isn't enough for auto-discovered panes: if grok exited,
+    -- the pane is now a shell, and pasting + Enter there would EXECUTE the
+    -- context block as shell commands.
+    if cmd and (M._manual or is_grok_cmd(cmd)) then
+      return M._pane
+    end
+    M._pane = nil
+    M._manual = false
   end
 
   -- Prefer the current window, then widen to all panes.
@@ -71,10 +91,9 @@ function M.find_grok_pane()
     if out then
       for line in (out .. '\n'):gmatch('([^\n]*)\n') do
         local pid, cmd = line:match('^(%%%d+)%s+(.+)$')
-        -- Skip our own nvim pane; anything else (a shell running grok, the grok
-        -- binary itself, etc.) is a candidate.
-        if pid and cmd and not cmd:match('n?vim') then
+        if pid and cmd and is_grok_cmd(cmd) then
           M._pane = pid
+          M._manual = false
           return pid
         end
       end
@@ -89,9 +108,11 @@ end
 function M.attach(pane)
   if pane and pane ~= '' then
     M._pane = pane
+    M._manual = true
     return pane
   end
   M._pane = nil
+  M._manual = false
   return M.find_grok_pane()
 end
 
