@@ -19,7 +19,12 @@ M.mason_servers = {
 
   prosemd_lsp = {},
   markdown_oxide = {},
-  harper_ls = {},
+  -- Do not attach to rust/lua/etc: it lints identifiers as English and
+  -- answers textDocument/codeAction, which steals rust-analyzer's client
+  -- context in rustaceanvim's grouped action UI.
+  harper_ls = {
+    filetypes = { 'markdown', 'text', 'gitcommit', 'plaintext' },
+  },
 
   -- python
   pylsp = {},

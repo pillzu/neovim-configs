@@ -110,3 +110,8 @@ vim.o.listchars = 'tab:» ,trail:•'
 
 -- Disable inlay hints by default (fixes "Invalid 'col': out of range" errors in 0.11.x)
 vim.lsp.inlay_hint.enable(false)
+
+-- rust-analyzer semantic tokens default to priority 125, above treesitter
+-- (100). That recasts types/functions by LSP kind (declaration vs reference,
+-- struct vs generic) and is what made rust look like a broken colorscheme.
+vim.highlight.priorities.semantic_tokens = 95

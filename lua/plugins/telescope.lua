@@ -2,10 +2,10 @@ return {
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
-    -- 0.1.x is frozen (2024) and still calls nvim-treesitter's removed
-    -- `parsers.ft_to_lang`, which crashes previewers on Nvim 0.12 + treesitter
-    -- `main`. Master uses vim.treesitter.language.get_lang / vim.treesitter.start.
+    -- 0.1.x calls nvim-treesitter's removed parsers.ft_to_lang (preview crash).
+    -- Master uses vim.treesitter.language.get_lang / vim.treesitter.start.
     branch = 'master',
+    version = false,
     dependencies = {
       'nvim-lua/plenary.nvim',
       { 'junegunn/fzf', build = './install --bin' },

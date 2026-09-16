@@ -13,6 +13,20 @@ local nmap = function(keys, func, desc)
   vim.keymap.set('n', keys, func, { buffer = true, desc = desc })
 end
 
+--- Code actions for the current line (not only the exact cursor column).
+--- Neovim 0.12's default filter requires the cursor to sit inside the
+--- diagnostic range, which makes `<leader>ca` look empty on rust-analyzer quickfixes.
+function M.code_action()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
+  vim.lsp.buf.code_action {
+    context = {
+      triggerKind = vim.lsp.protocol.CodeActionTriggerKind.Invoked,
+      diagnostics = vim.lsp.diagnostic.from(vim.diagnostic.get(bufnr, { lnum = lnum })),
+    },
+  }
+end
+
 -- Paths that drown gr in dependency noise (cargo registry, git deps, rust-src).
 -- Lua patterns matched by Telescope against the full file path.
 M.lsp_ref_ignore_patterns = {
@@ -150,8 +164,9 @@ end
 
 -- Function run when an LSP connects to a buffer
 M.on_attach = function(_, bufnr)
-  -- g-family for LSP (consistent navigation + actions)
-  nmap('ga', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  -- g-family for LSP navigation; code actions stay on <leader>ca (not `ga`,
+  -- which is Vim's "print ASCII under cursor").
+  vim.keymap.set({ 'n', 'x' }, '<leader>ca', M.code_action, { buffer = true, desc = 'LSP: [C]ode [A]ction' })
   nmap('rn', vim.lsp.buf.rename, '[R]e[n]ame')
 
   nmap('gd', M.lsp_definitions, '[G]oto [D]efinition')

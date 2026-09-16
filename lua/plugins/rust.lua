@@ -123,10 +123,10 @@ return {
             local tb = require('telescope.builtin')
             local opts = { buffer = bufnr, silent = true }
 
-            -- Grouped code actions: rustaceanvim flattens them → single `ga`.
-            vim.keymap.set('n', 'ga', function()
-              vim.cmd.RustLsp('codeAction')
-            end, vim.tbl_extend('force', opts, { desc = 'LSP: Code Action (rust)' }))
+            -- Builtin code_action (nvim 0.12): per-client resolve + exec_cmd.
+            -- rustaceanvim's grouped UI still tags every action with the last
+            -- client's ctx, so apply silently no-ops when harper/RA race.
+            vim.keymap.set({ 'n', 'x' }, '<leader>ca', u.code_action, vim.tbl_extend('force', opts, { desc = 'LSP: [C]ode [A]ction' }))
 
             -- Hover with rustaceanvim actions (overrides generic K from on_attach).
             vim.keymap.set('n', 'K', function()

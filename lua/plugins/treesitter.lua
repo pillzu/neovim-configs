@@ -18,8 +18,8 @@ return {
       local ts = require 'nvim-treesitter'
       local ts_config = require 'nvim-treesitter.config'
 
-      -- Default install dir is stdpath('data')/site (parsers + query symlinks).
-      ts.setup {}
+      -- Pass install_dir so it is prepended to rtp (queries + parsers in site/).
+      ts.setup { install_dir = vim.fs.joinpath(vim.fn.stdpath 'data', 'site') }
 
       -- Install any missing parsers from the list (main no longer uses ensure_installed opts).
       local installed = ts_config.get_installed()
